@@ -41,6 +41,16 @@
     \fancyhf{} % Efface les en-têtes et pieds de page par défaut
 }
 
+
+
+
+
+
+
+
+
+
+
     
 \begin{document} 
 
@@ -67,20 +77,92 @@
  %\fancyfoot[R]{\hyperlink{toc}{\thepage}}
 
 \pagestyle{fancy}
+
 \nsection{Introduction}
 
-Dans le cadre de notre module de Systèmes Embarqués.
-\begin{itemize}
-    \item Réduire la dimensionnalité des données
-    \item Mettre en évidence les structures et corrélations sous-jacentes
-    \item Visualiser des informations complexes de manière synthétique
-\end{itemize}
+Le réchauffement climatique est un des défis majeurs auquel l’humanité aura à faire face dans les prochaines années. L’influence de l’activité humaine, longtemps contestée, ne fait plus aucun doute. D’après un récent rapport de l’Organisation Météorologique Mondiale, 2019 est la 5\textsuperscript{ème} année la plus chaude depuis le début des relevés météorologiques en 1850. La température moyenne en 2018 est de 1°C supérieure à celle relevée à l’ère préindustrielle.
 
-À travers ces exemples, nous explorerons les étapes clés de la méthode : prétraitement des données, calcul des composantes principales, projection et interprétation des résultats.
+Selon les travaux des scientifiques du GIEC, si l’humanité veut continuer à vivre sur la planète sans subir des changements climatiques catastrophiques mettant en cause sa survie et celle de tous les êtres vivants, cette température moyenne ne devra pas excéder 1.5°C d’ici à la fin de ce siècle.
 
+Dans ce contexte, il est intéressant de pouvoir disposer d’un équipement permettant de relever les différentes grandeurs météorologiques du lieu où l’on se trouve.
 
+L’objectif de ce projet, utilisant un système embarqué, est donc de concevoir et de réaliser une station météorologique.
+
+\newpage
 \vspace{0.5cm}
 
 
+
+\section{Cahier des charges}
+
+L'objectif de ce projet est de réaliser une station météorologique utilisant une carte STM32F746G DIscovery.
+Cette station doit etre capable de mesurer : 
+\begin{itemize}
+    \item La température
+    \item La pression atmosphérique
+    \item L'humidité
+    \item La luminosité
+    \item La direction et la vitesse du vent
+    \item La quantité d'eau tombée en une journée (pluviométrie)
+\end{itemize}
+Ces mesures seront affichées et stockées directement sur la station (en utilisant le LCD et le lecteur de carte SD de la carte Discovery) et pourront également être transmises par radio vers un dispositif distant (smartphone, Raspberry Pi, etc.).
+
+\section{Caractéristiques du shield ST X-NUCLEO-IKS01A3}
+
+\subsection{Capteurs}
+\begin{itemize}
+    \item \textbf{LSM6DSO}: Accéléromètre 3D ($\pm2/\pm4/\pm8/\pm16g$) et gyroscope 3D ($\pm125/\pm250/\pm500/\pm1000/\pm2000$ dps)
+    \item \textbf{LIS2MDL}: Magnétomètre 3D ($\pm50$ gauss)
+    \item \textbf{LIS2DW12}: Accéléromètre 3D ($\pm2/\pm4/\pm8/\pm16g$)
+    \item \textbf{LPS22HH}: Capteur de pression (baromètre à sortie numérique absolue de 260-1260 hPa)
+    \item \textbf{HTS221}: Capteur d'humidité relative et de température
+    \item \textbf{STTS751}: Capteur de température (plage de $-40°C$ à $+125°C$)
+\end{itemize}
+
+\subsection{Connectivité et compatibilité}
+\begin{itemize}
+    \item Compatible avec la disposition du connecteur Arduino UNO R3
+    \item S'interface avec les microcontrôleurs STM32 via la broche I2C (possibilité de modifier le port I2C par défaut)
+    \item Compatible avec les cartes Nucleo STM32
+\end{itemize}
+
+\subsection{Caractéristiques supplémentaires}
+\begin{itemize}
+    \item Embase DIL 24 broches disponible pour adaptateurs MEMS supplémentaires et autres capteurs
+    \item Fonctionnalités de hub pour capteurs I2C avec LSM6DSO
+    \item Bibliothèque de firmware de développement complète et gratuite, avec exemples pour tous les capteurs, compatible avec le micrologiciel STM32Cube
+\end{itemize}
+
+\subsection{Configuration matérielle}
+La carte peut être configurée en deux modes :
+\begin{enumerate}
+    \item \textbf{Mode standard}: Tous les dispositifs sur le même bus I2C
+    \item \textbf{Mode SensorHub}: LSM6DSO et LIS2DW12 sur I2C2, autres dispositifs connectés au maître LSM6DSO via I2C1
+\end{enumerate}
+
+\subsection{Alimentation}
+\begin{itemize}
+    \item Chaque dispositif dispose d'une alimentation séparée pour la mesure individuelle de la consommation d'énergie
+    \item Un LDO génère 1,8V pour la plupart des capteurs MEMS
+    \item Un LDO séparé génère 2,5V pour le STTS751
+\end{itemize}
+
 \newpage
+
+\nsection{Conclusion}
+
+L'Analyse en Composantes Principales (ACP) s'est révélée un outil mathématique puissant pour transformer et comprendre des données multidimensionnelles. 
+
+Nos deux études de cas ont démontré sa capacité à :
+\begin{itemize}
+    \item Réduire la dimensionnalité des données
+    \item Extraire les informations essentielles
+    \item Révéler des structures cachées
+\end{itemize}
+
+Sur les notes scolaires comme sur l'image satellitaire d'Indian Pines, l'ACP a permis de simplifier des données complexes tout en préservant leur information structurelle fondamentale.
+
+Au-delà de ses aspects techniques, l'ACP représente une approche philosophique : chercher l'essentiel dans la complexité.
+
+Comparée à d'autres méthodes comme l'Analyse Factorielle des Correspondances (AFC) ou l'Analyse des Correspondances Multiples (ACM), l'ACP se distingue par sa capacité à traiter des données numériques continues, offrant une visualisation intuitive des relations entre variables, là où ces autres méthodes sont plus adaptées aux données catégorielles.
 \end{document}
