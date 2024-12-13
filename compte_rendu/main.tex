@@ -1,14 +1,86 @@
-\documentclass{article}
-\usepackage{graphicx} % Required for inserting images
+\documentclass[12pt]{article}
+%\usepackage[a4paper,width=150mm,top=10mm,bottom=20mm]{geometry}
+\usepackage[a4paper,width=160mm,top=25mm,bottom=25mm]{geometry}
 
-\title{Projet de Station Météo}
-\author{Nobel DJESSOU, Tristan Groussard, Maxime Moret}
-\date{December 2024}
+\input{dependencies}
 
-\begin{document}
 
-\maketitle
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{titling}
+\usepackage{graphicx}
+\usepackage{svg}
+% Ajouter dans le préambule du document :
+\usepackage{minted}
+\usepackage{xcolor}
+\usepackage{float}
+\floatplacement{figure}{H}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage[all]{hypcap}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
 
-\section{Introduction}
 
+
+%\geometry{margin=2.5cm}
+\setlength{\headheight}{15pt}
+
+% Configuration de fancyhdr
+
+\fancyhf{} % Efface tous les champs d'en-tête et de pied de page
+\renewcommand{\headrulewidth}{0.4pt} % Ajoute une ligne d'en-tête
+
+% Configuration de l'en-tête pour les pages normales
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\rightmark}
+
+% Configuration pour la première page
+\fancypagestyle{plain}{
+    \fancyhf{} % Efface les en-têtes et pieds de page par défaut
+}
+
+    
+\begin{document} 
+
+\input{titlepage}
+
+
+
+\pagenumbering{gobble}
+
+
+\tableofcontents
+\label{toc} % Étiquette pour le lien
+
+
+\listoffigures
+
+\newpage
+
+
+\clearpage
+\setcounter{page}{3}
+\pagenumbering{arabic}
+\fancyfoot[C]{\hyperlink{toc}{\thepage} / \pageref{LastPage}} % Numéro de page au centre avec total
+ %\fancyfoot[R]{\hyperlink{toc}{\thepage}}
+
+\pagestyle{fancy}
+\nsection{Introduction}
+
+Dans le cadre de notre module de Systèmes Embarqués.
+\begin{itemize}
+    \item Réduire la dimensionnalité des données
+    \item Mettre en évidence les structures et corrélations sous-jacentes
+    \item Visualiser des informations complexes de manière synthétique
+\end{itemize}
+
+À travers ces exemples, nous explorerons les étapes clés de la méthode : prétraitement des données, calcul des composantes principales, projection et interprétation des résultats.
+
+
+\vspace{0.5cm}
+
+
+\newpage
 \end{document}

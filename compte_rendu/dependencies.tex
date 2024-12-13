@@ -1,0 +1,34 @@
+
+
+%%%%% For Title Page %%%%%
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{etoolbox}
+\usepackage{relsize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[utf8]{inputenc}
+
+
+
+
+
+% Redéfinition des marques pour utiliser la section et la sous-section
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\renewcommand{\subsectionmark}[1]{\markright{\thesubsection\ #1}}
+
+
+
+\newcommand{\nsection}[1]{%
+  \section*{#1}%
+  \addcontentsline{toc}{section}{#1}%
+  \markboth{#1}{}% Met à jour les deux marques pour les sections non numérotées
+  
+}
+
+\newcommand{\nsubsection}[1]{%
+  \subsection*{#1}%
+  \addcontentsline{toc}{subsection}{#1}%
+  \markright{#1}% Met à jour la marque de droite pour les sous-sections non numérotées
+}
+
