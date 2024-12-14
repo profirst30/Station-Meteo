@@ -147,22 +147,67 @@ La carte peut être configurée en deux modes :
     \item Un LDO séparé génère 2,5V pour le STTS751
 \end{itemize}
 
+\section{Choix des capteurs}
+\subsection{Température,humidité et pression atmosphérique}
+
+La récupération des données des capteurs sur la carte d'extension \textbf{X-NUCLEO-IKS01A3} se fait principalement via le bus \textbf{I2C} (Inter-Integrated Circuit).
+
+\subsection*{Configurations possibles}
+
+La carte peut être configurée de deux manières différentes pour la communication I2C :
+\begin{itemize}
+    \item \textbf{Mode standard} : Tous les capteurs sont connectés sur un seul bus I2C.
+    \item \textbf{Mode SensorHub} :
+    \begin{itemize}
+        \item \textbf{LSM6DSO} et \textbf{LIS2DW12} sont connectés au bus \textbf{I2C2}.
+        \item Les autres capteurs (\textbf{LIS2MDL}, \textbf{LPS22HH}, \textbf{HTS221}, \textbf{STTS751}) sont connectés au \textbf{LSM6DSO} via le bus \textbf{I2C1}.
+    \end{itemize}
+\end{itemize}
+
+Le choix du mode se fait par la configuration des cavaliers \textbf{JP7} et \textbf{JP8} sur la carte.
+
+\subsection*{Particularités}
+
+\begin{itemize}
+    \item La carte s'interface avec les microcontrôleurs \textbf{STM32} via la broche \textbf{I2C1}.
+    \item Il est possible de modifier le port I2C par défaut si nécessaire.
+    \item Le \textbf{LSM6DSO} peut fonctionner comme un hub I2C pour les autres capteurs.
+\end{itemize}
+
+Cette flexibilité dans la configuration du bus I2C permet d'adapter la carte à différents besoins et scénarios d'utilisation.
+
+\subsection{Capteurs de vitesse et direction du vent}
+Le capteur de vitesse du vent, ou \textbf{anémomètre}, est de type à coupelles. Il mesure la vitesse du vent en fermant un contact lorsqu'un aimant passe devant un interrupteur. 
+\begin{itemize}
+    \item Une vitesse de vent de \textbf{2,4 km/h} provoque la fermeture de l'interrupteur une fois par seconde.
+    \item L'interrupteur de l'anémomètre est connecté aux deux conducteurs intérieurs du câble \textbf{RJ11} partagé par l'anémomètre et la girouette (broches 2 et 3).
+\end{itemize}
+
+Le capteur de direction du vent, ou \textbf{girouette}, est le plus complexe des trois capteurs. 
+\begin{itemize}
+    \item Il possède huit interrupteurs, chacun connecté à une résistance différente.
+    \item L'aimant de la girouette peut fermer deux interrupteurs à la fois, ce qui permet d'indiquer jusqu'à \textbf{16 positions différentes}.
+    \item Une résistance externe peut être utilisée pour former un diviseur de tension, produisant une tension de sortie mesurable avec un convertisseur analogique-numérique.
+\end{itemize}
+
+Les valeurs de résistance pour toutes les 16 positions possibles sont données dans le tableau du document source. Les valeurs de résistance pour les positions intermédiaires sont le résultat de deux résistances adjacentes connectées en parallèle lorsque l'aimant de la girouette active deux interrupteurs simultanément.
+
+\subsection{Capteur de pluie}
+Le capteur de pluie utilise le principe du \textbf{« tipping bucket »}, aussi appelé \textbf{auget basculeur}. Ce type de pluviomètre est constitué de deux petits récipients montés sur un axe horizontal. Lorsqu'un récipient est rempli par l'eau de pluie, il bascule sous son poids, vidant son contenu et permettant à l'autre récipient de se remplir. Chaque basculement ferme un contact électrique qui peut être enregistré par un compteur numérique ou une interruption de microcontrôleur.
+
+\subsection*{Récupération des données de pluviométrie avec le STM32}
+
+Pour récupérer l'information de pluviométrie avec le \textbf{STM32}, il faut :
+\begin{itemize}
+    \item Connecter l'interrupteur du pluviomètre aux deux conducteurs centraux d'un câble \textbf{RJ11}.
+    \item Configurer une broche du \textbf{STM32} en entrée d'interruption pour détecter la fermeture du contact.
+    \item Compter le nombre d'interruptions pour déterminer la quantité de pluie tombée.
+\end{itemize}
+
+Chaque basculement correspond à une quantité de pluie précise. Dans ce cas, chaque basculement de l'auget représente \textbf{0,2794 mm} de pluie.
 \newpage
 
 \nsection{Conclusion}
 
-L'Analyse en Composantes Principales (ACP) s'est révélée un outil mathématique puissant pour transformer et comprendre des données multidimensionnelles. 
-
-Nos deux études de cas ont démontré sa capacité à :
-\begin{itemize}
-    \item Réduire la dimensionnalité des données
-    \item Extraire les informations essentielles
-    \item Révéler des structures cachées
-\end{itemize}
-
-Sur les notes scolaires comme sur l'image satellitaire d'Indian Pines, l'ACP a permis de simplifier des données complexes tout en préservant leur information structurelle fondamentale.
-
-Au-delà de ses aspects techniques, l'ACP représente une approche philosophique : chercher l'essentiel dans la complexité.
-
-Comparée à d'autres méthodes comme l'Analyse Factorielle des Correspondances (AFC) ou l'Analyse des Correspondances Multiples (ACM), l'ACP se distingue par sa capacité à traiter des données numériques continues, offrant une visualisation intuitive des relations entre variables, là où ces autres méthodes sont plus adaptées aux données catégorielles.
+Ce projet a été d'une grande richesse en termes d'apprentissage. Il nous a permis de mettre en pratique les connaissances acquises en cours de systèmes embarqués. Nous avons pu découvrir les différentes étapes de la conception d'un système embarqué, de la spécification des besoins à la réalisation du système en passant par la conception et la programmation.
 \end{document}
