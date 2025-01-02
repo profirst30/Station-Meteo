@@ -107,6 +107,57 @@ Cette station doit etre capable de mesurer :
 \end{itemize}
 Ces mesures seront affichées et stockées directement sur la station (en utilisant le LCD et le lecteur de carte SD de la carte Discovery) et pourront également être transmises par radio vers un dispositif distant (smartphone, Raspberry Pi, etc.).
 
+
+\subsection{Table des Entrées/Sorties}
+
+\begin{table}[H]
+\centering
+\caption{Table des Entrées/Sorties du système}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Composant} & \textbf{Type} & \textbf{Interface} & \textbf{Pins STM32} & \textbf{Caractéristiques} \\
+\hline
+HTS221 & Entrée & I2C1 & 
+\begin{tabular}[c]{@{}l@{}}
+PB8 (SCL)\\
+PB9 (SDA)
+\end{tabular} & 
+\begin{tabular}[c]{@{}l@{}}
+Humidité: 0-100\%\\
+Temp: -40 à +120°C
+\end{tabular} \\
+\hline
+LPS22HH & Entrée & I2C1 & 
+\begin{tabular}[c]{@{}l@{}}
+PB8 (SCL)\\
+PB9 (SDA)
+\end{tabular} & 
+Pression: 260-1260 hPa \\
+\hline
+Anémomètre & Entrée & GPIO & PC6 & 2,4km/h = 1Hz \\
+\hline
+Girouette & Entrée & ADC & PA0 & 16 positions (0-360°) \\
+\hline
+Pluviomètre & Entrée & GPIO & PC8 & 0,2794mm/impulsion \\
+\hline
+Écran LCD & Sortie & LTDC & 
+\begin{tabular}[c]{@{}l@{}}
+Multiple pins\\
+(voir datasheet)
+\end{tabular} & 480x272 pixels \\
+\hline
+Carte SD & E/S & SDIO & 
+\begin{tabular}[c]{@{}l@{}}
+PC8-PC11\\
+(données)\\
+PC12 (CLK)\\
+PD2 (CMD)
+\end{tabular} & Mode 4-bits \\
+\hline
+\end{tabular}
+\end{table}
+
+
 \section{Caractéristiques du shield ST X-NUCLEO-IKS01A3}
 
 \subsection{Capteurs}
@@ -206,6 +257,178 @@ Pour récupérer l'information de pluviométrie avec le \textbf{STM32}, il faut 
 
 Chaque basculement correspond à une quantité de pluie précise. Dans ce cas, chaque basculement de l'auget représente \textbf{0,2794 mm} de pluie.
 \newpage
+
+\section{Développement et validation unitaire}
+
+\subsection{Stratégie de test}
+Avant l'intégration complète du système, chaque composant a été testé individuellement pour garantir son bon fonctionnement. Cette approche nous a permis de :
+\begin{itemize}
+    \item Valider le fonctionnement de chaque capteur individuellement
+    \item Identifier et corriger les problèmes au plus tôt
+    \item Établir une base solide pour l'intégration finale
+\end{itemize}
+
+\subsection{Capteurs environnementaux (HTS221 et LPS22HH)}
+\subsubsection{Configuration}
+La communication avec ces capteurs est réalisée via le bus I2C1. Voici les étapes de validation :
+\begin{enumerate}
+    \item Test de présence des capteurs sur le bus I2C
+    \item Configuration des registres de contrôle
+    \item Validation de la récupération des données
+\end{enumerate}
+
+\subsubsection{Tests réalisés}
+\begin{itemize}
+    \item Lecture des identifiants des capteurs
+    \item Vérification de la cohérence des mesures
+    \item Test de la fréquence d'échantillonnage
+\end{itemize}
+
+[Insérer capture d'écran du terminal montrant les mesures]
+
+\subsection{Anémomètre et Girouette}
+\subsubsection{Configuration matérielle}
+L'anémomètre nécessite :
+\begin{itemize}
+    \item Une entrée GPIO configurée en interruption externe
+    \item Une résistance de pull-up pour stabiliser le signal
+\end{itemize}
+
+\subsubsection{Validation}
+Tests effectués à l'aide d'un oscilloscope et du logiciel Analog Discovery :
+\begin{itemize}
+    \item Mesure de la fréquence des impulsions
+    \item Validation de la conversion fréquence/vitesse
+    \item Test des 16 positions de la girouette
+\end{itemize}
+
+[Insérer capture d'écran de l'oscilloscope]
+
+\subsection{Pluviomètre}
+\subsubsection{Configuration matérielle}
+Le pluviomètre de type "tipping bucket" nécessite :
+\begin{itemize}
+    \item Une entrée GPIO configurée en interruption externe
+    \item Une résistance de pull-up interne activée
+    \item Configuration de l'antirebond logiciel
+\end{itemize}
+
+\subsubsection{Tests de validation}
+\begin{itemize}
+    \item Test unitaire avec simulation manuelle des basculements
+    \item Vérification du comptage des impulsions
+    \item Validation de la conversion (0,2794 mm par basculement)
+    \item Test de l'antirebond
+\end{itemize}
+
+\subsection{Interface utilisateur LCD}
+\subsubsection{Configuration}
+\begin{itemize}
+    \item Initialisation du contrôleur LTDC
+    \item Configuration de la résolution (480x272)
+    \item Configuration du format de couleur (RGB565)
+\end{itemize}
+
+\subsubsection{Tests effectués}
+\begin{itemize}
+    \item Test d'affichage des caractères
+    \item Validation du rafraîchissement de l'écran
+    \item Test des différentes zones d'affichage
+    \item Vérification du contraste et de la lisibilité
+\end{itemize}
+
+[Insérer capture d'écran de l'interface]
+
+\subsection{Stockage sur carte SD}
+\subsubsection{Configuration}
+\begin{itemize}
+    \item Initialisation du contrôleur SDMMC en mode 4 bits
+    \item Configuration du système de fichiers FAT via FatFS
+    \item Configuration du DMA pour les transferts
+\end{itemize}
+
+\subsubsection{Validation}
+\begin{itemize}
+    \item Test de création de fichiers
+    \item Validation de l'écriture et lecture des données
+    \item Test de performance en écriture continue
+    \item Vérification de l'intégrité des données
+\end{itemize}
+
+[Insérer capture d'écran du contenu d'un fichier de log]
+
+\subsection{Communication radio}
+\subsubsection{Configuration matérielle}
+\begin{itemize}
+    \item Configuration du module radio 
+    \item Paramétrage du débit et de la puissance d'émission
+    \item Configuration du protocole de communication
+\end{itemize}
+
+\subsubsection{Tests de validation}
+\begin{itemize}
+    \item Test de portée
+    \item Validation de la fiabilité de la transmission
+    \item Test de la consommation énergétique
+    \item Vérification de l'intégrité des données transmises
+\end{itemize}
+
+[Insérer capture d'écran des données reçues]
+
+\section{Développement et validation des éléments d'assemblage}
+
+\subsection{Agrégation des mesures}
+\subsubsection{Architecture logicielle}
+L'agrégation des mesures a été implémentée selon une architecture à trois niveaux :
+\begin{itemize}
+    \item Niveau acquisition : lecture des capteurs avec gestion des temporisations
+    \item Niveau traitement : moyennage et filtrage des données
+    \item Niveau stockage : formatage et sauvegarde des données
+\end{itemize}
+
+\subsubsection{Stratégie d'échantillonnage}
+\begin{itemize}
+    \item Capteurs I2C (température, humidité, pression) : échantillonnage périodique (1Hz)
+    \item Anémomètre : calcul de la vitesse sur fenêtre glissante de 5 secondes
+    \item Pluviomètre : cumul sur période configurable (heure/jour)
+    \item Horodatage via RTC pour chaque série de mesures
+\end{itemize}
+
+\subsubsection{Tests d'intégration}
+\begin{itemize}
+    \item Validation de la synchronisation des mesures
+    \item Test de charge (acquisition continue sur 24h)
+    \item Vérification de la cohérence temporelle des données
+    \item Test des mécanismes de reprise sur erreur
+\end{itemize}
+
+\subsection{Gestion de l'IHM}
+\subsubsection{Organisation de l'interface}
+L'interface utilisateur a été conçue pour être intuitive et fonctionnelle :
+\begin{itemize}
+    \item Écran principal : affichage en temps réel des mesures courantes
+    \item Écran statistiques : valeurs min/max/moyennes sur 24h
+    \item Écran configuration : paramètres système et calibration
+    \item Zone d'état : indication des erreurs et état du système
+\end{itemize}
+
+[Insérer capture d'écran de l'interface principale]
+
+\subsubsection{Gestion des événements}
+\begin{itemize}
+    \item Rafraîchissement périodique des valeurs (1Hz)
+    \item Gestion des alertes (dépassement de seuils)
+    \item Historique des événements remarquables
+    \item Interface de configuration des paramètres
+\end{itemize}
+
+\subsubsection{Tests de validation}
+\begin{itemize}
+    \item Test de réactivité de l'interface
+    \item Validation du comportement avec charge CPU importante
+    \item Test des différents scénarios d'utilisation
+    \item Vérification de la persistance des paramètres
+\end{itemize}
 
 \nsection{Conclusion}
 
