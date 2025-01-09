@@ -42,15 +42,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
     
 \begin{document} 
 
@@ -79,22 +70,16 @@
 \pagestyle{fancy}
 
 \nsection{Introduction}
+Le réchauffement climatique est un des défis majeurs auquel l'humanité aura à faire face dans les prochaines années. L'influence de l'activité humaine, longtemps contestée, ne fait plus aucun doute. D'après un récent rapport de l'Organisation Météorologique Mondiale, 2019 est la 5\textsuperscript{ème} année la plus chaude depuis le début des relevés météorologiques en 1850. La température moyenne en 2018 est de 1°C supérieure à celle relevée à l'ère préindustrielle.
 
-Le réchauffement climatique est un des défis majeurs auquel l’humanité aura à faire face dans les prochaines années. L’influence de l’activité humaine, longtemps contestée, ne fait plus aucun doute. D’après un récent rapport de l’Organisation Météorologique Mondiale, 2019 est la 5\textsuperscript{ème} année la plus chaude depuis le début des relevés météorologiques en 1850. La température moyenne en 2018 est de 1°C supérieure à celle relevée à l’ère préindustrielle.
+Selon les travaux des scientifiques du GIEC, si l'humanité veut continuer à vivre sur la planète sans subir des changements climatiques catastrophiques mettant en cause sa survie et celle de tous les êtres vivants, cette température moyenne ne devra pas excéder 1.5°C d'ici à la fin de ce siècle.
 
-Selon les travaux des scientifiques du GIEC, si l’humanité veut continuer à vivre sur la planète sans subir des changements climatiques catastrophiques mettant en cause sa survie et celle de tous les êtres vivants, cette température moyenne ne devra pas excéder 1.5°C d’ici à la fin de ce siècle.
+Dans ce contexte, il est intéressant de pouvoir disposer d'un équipement permettant de relever les différentes grandeurs météorologiques du lieu où l'on se trouve.
 
-Dans ce contexte, il est intéressant de pouvoir disposer d’un équipement permettant de relever les différentes grandeurs météorologiques du lieu où l’on se trouve.
-
-L’objectif de ce projet, utilisant un système embarqué, est donc de concevoir et de réaliser une station météorologique.
-
-\newpage
-\vspace{0.5cm}
-
-
+L'objectif de ce projet, utilisant un système embarqué, est donc de concevoir et de réaliser une station météorologique.
 
 \section{Cahier des charges}
-
+\subsection{Objectifs détaillés}
 L'objectif de ce projet est de réaliser une station météorologique utilisant une carte STM32F746G DIscovery.
 Cette station doit etre capable de mesurer : 
 \begin{itemize}
@@ -109,58 +94,121 @@ Ces mesures seront affichées et stockées directement sur la station (en utilis
 
 
 \subsection{Table des Entrées/Sorties}
-
 \begin{table}[H]
-\centering
-\caption{Table des Entrées/Sorties du système}
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-\textbf{Composant} & \textbf{Type} & \textbf{Interface} & \textbf{Pins STM32} & \textbf{Caractéristiques} \\
-\hline
-HTS221 & Entrée & I2C1 & 
-\begin{tabular}[c]{@{}l@{}}
-PB8 (SCL)\\
-PB9 (SDA)
-\end{tabular} & 
-\begin{tabular}[c]{@{}l@{}}
-Humidité: 0-100\%\\
-Temp: -40 à +120°C
-\end{tabular} \\
-\hline
-LPS22HH & Entrée & I2C1 & 
-\begin{tabular}[c]{@{}l@{}}
-PB8 (SCL)\\
-PB9 (SDA)
-\end{tabular} & 
-Pression: 260-1260 hPa \\
-\hline
-Anémomètre & Entrée & GPIO & PC6 & 2,4km/h = 1Hz \\
-\hline
-Girouette & Entrée & ADC & PA0 & 16 positions (0-360°) \\
-\hline
-Pluviomètre & Entrée & GPIO & PC8 & 0,2794mm/impulsion \\
-\hline
-Écran LCD & Sortie & LTDC & 
-\begin{tabular}[c]{@{}l@{}}
-Multiple pins\\
-(voir datasheet)
-\end{tabular} & 480x272 pixels \\
-\hline
-Carte SD & E/S & SDIO & 
-\begin{tabular}[c]{@{}l@{}}
-PC8-PC11\\
-(données)\\
-PC12 (CLK)\\
-PD2 (CMD)
-\end{tabular} & Mode 4-bits \\
-\hline
-\end{tabular}
+    \centering
+    \caption{Table des Entrées/Sorties du système}
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    \textbf{Composant} & \textbf{Type} & \textbf{Interface} & \textbf{Pins STM32} & \textbf{Caractéristiques} \\
+    \hline
+    HTS221 & Entrée & I2C1 & 
+    \begin{tabular}[c]{@{}l@{}}
+    PB8 (SCL)\\
+    PB9 (SDA)
+    \end{tabular} & 
+    \begin{tabular}[c]{@{}l@{}}
+    Humidité: 0-100\%\\
+    Temp: -40 à +120°C
+    \end{tabular} \\
+    \hline
+    LPS22HH & Entrée & I2C1 & 
+    \begin{tabular}[c]{@{}l@{}}
+    PB8 (SCL)\\
+    PB9 (SDA)
+    \end{tabular} & 
+    Pression: 260-1260 hPa \\
+    \hline
+    Anémomètre & Entrée & GPIO & PC6 & 2,4km/h = 1Hz \\
+    \hline
+    Girouette & Entrée & ADC & PA0 & 16 positions (0-360°) \\
+    \hline
+    Pluviomètre & Entrée & GPIO & PC8 & 0,2794mm/impulsion \\
+    \hline
+    Écran LCD & Sortie & LTDC & 
+    \begin{tabular}[c]{@{}l@{}}
+    Multiple pins\\
+    (voir datasheet)
+    \end{tabular} & 480x272 pixels \\
+    \hline
+    Carte SD & E/S & SDIO & 
+    \begin{tabular}[c]{@{}l@{}}
+    PC8-PC11\\
+    (données)\\
+    PC12 (CLK)\\
+    PD2 (CMD)
+    \end{tabular} & Mode 4-bits \\
+    \hline
+    \end{tabular}
 \end{table}
+    
+
+\subsection{Spécifications fonctionnelles}
+
+La station météorologique doit répondre aux fonctionnalités suivantes :
+
+\subsubsection{Acquisition des données}
+\begin{itemize}
+    \item Mesure de la température ambiante (plage de -40°C à +120°C)
+    \item Mesure du taux d'humidité relative (0-100\%)
+    \item Mesure de la pression atmosphérique (260-1260 hPa)
+    \item Mesure de la vitesse du vent (conversion 2,4 km/h = 1 Hz)
+    \item Mesure de la direction du vent (16 positions sur 360°)
+    \item Mesure de la pluviométrie (résolution de 0,2794 mm par basculement)
+\end{itemize}
+
+\subsubsection{Traitement et stockage}
+\begin{itemize}
+    \item Calcul des moyennes sur différentes périodes (horaire, journalière)
+    \item Détection des valeurs extrêmes (minimum et maximum)
+    \item Stockage des données sur carte SD
+    \begin{itemize}
+        \item Format de fichier structuré pour exploitation ultérieure
+        \item Horodatage de chaque mesure
+        \item Organisation par jour/mois
+    \end{itemize}
+    \item Conservation de l'historique des mesures
+\end{itemize}
+
+\subsubsection{Interface utilisateur}
+\begin{itemize}
+    \item Affichage en temps réel sur écran LCD 480x272 pixels
+    \begin{itemize}
+        \item Valeurs courantes des capteurs
+        \item Graphiques d'évolution
+        \item Statistiques journalières
+    \end{itemize}
+    \item Navigation entre différents écrans
+    \begin{itemize}
+        \item Écran principal des mesures
+        \item Écrans détaillés par type de mesure
+        \item Écran de configuration
+        \item Écran des statistiques
+    \end{itemize}
+    \item Configuration système
+    \begin{itemize}
+        \item Réglage date et heure
+        \item Paramètres d'acquisition
+        \item Paramètres d'affichage
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Gestion de l'énergie}
+\begin{itemize}
+    \item Optimisation de la consommation énergétique
+    \item Adaptation de la fréquence d'échantillonnage selon les besoins
+    \item Utilisation des modes basse consommation lorsque possible
+\end{itemize}
+
+\subsubsection{Communication}
+\begin{itemize}
+    \item Transmission des données vers un dispositif distant
+    \item Possibilité de configuration à distance
+    \item Remontée des alertes en cas de dépassement de seuils
+\end{itemize}
 
 
-\section{Caractéristiques du shield ST X-NUCLEO-IKS01A3}
-
-\subsection{Capteurs}
+\section{Analyse technique des composants}
+\subsection{Caractéristiques du shield ST X-NUCLEO-IKS01A3}
 \begin{itemize}
     \item \textbf{LSM6DSO}: Accéléromètre 3D ($\pm2/\pm4/\pm8/\pm16g$) et gyroscope 3D ($\pm125/\pm250/\pm500/\pm1000/\pm2000$ dps)
     \item \textbf{LIS2MDL}: Magnétomètre 3D ($\pm50$ gauss)
@@ -170,37 +218,8 @@ PD2 (CMD)
     \item \textbf{STTS751}: Capteur de température (plage de $-40°C$ à $+125°C$)
 \end{itemize}
 
-\subsection{Connectivité et compatibilité}
-\begin{itemize}
-    \item Compatible avec la disposition du connecteur Arduino UNO R3
-    \item S'interface avec les microcontrôleurs STM32 via la broche I2C (possibilité de modifier le port I2C par défaut)
-    \item Compatible avec les cartes Nucleo STM32
-\end{itemize}
-
-\subsection{Caractéristiques supplémentaires}
-\begin{itemize}
-    \item Embase DIL 24 broches disponible pour adaptateurs MEMS supplémentaires et autres capteurs
-    \item Fonctionnalités de hub pour capteurs I2C avec LSM6DSO
-    \item Bibliothèque de firmware de développement complète et gratuite, avec exemples pour tous les capteurs, compatible avec le micrologiciel STM32Cube
-\end{itemize}
-
-\subsection{Configuration matérielle}
-La carte peut être configurée en deux modes :
-\begin{enumerate}
-    \item \textbf{Mode standard}: Tous les dispositifs sur le même bus I2C
-    \item \textbf{Mode SensorHub}: LSM6DSO et LIS2DW12 sur I2C2, autres dispositifs connectés au maître LSM6DSO via I2C1
-\end{enumerate}
-
-\subsection{Alimentation}
-\begin{itemize}
-    \item Chaque dispositif dispose d'une alimentation séparée pour la mesure individuelle de la consommation d'énergie
-    \item Un LDO génère 1,8V pour la plupart des capteurs MEMS
-    \item Un LDO séparé génère 2,5V pour le STTS751
-\end{itemize}
-
-\section{Choix des capteurs}
-\subsection{Température,humidité et pression atmosphérique}
-
+\subsection{Étude des capteurs}
+\subsubsection{Température, humidité et pression}
 La récupération des données des capteurs sur la carte d'extension \textbf{X-NUCLEO-IKS01A3} se fait principalement via le bus \textbf{I2C} (Inter-Integrated Circuit).
 
 \subsection*{Configurations possibles}
@@ -227,7 +246,7 @@ Le choix du mode se fait par la configuration des cavaliers \textbf{JP7} et \tex
 
 Cette flexibilité dans la configuration du bus I2C permet d'adapter la carte à différents besoins et scénarios d'utilisation.
 
-\subsection{Capteurs de vitesse et direction du vent}
+\subsubsection{Anémomètre et girouette}
 Le capteur de vitesse du vent, ou \textbf{anémomètre}, est de type à coupelles. Il mesure la vitesse du vent en fermant un contact lorsqu'un aimant passe devant un interrupteur. 
 \begin{itemize}
     \item Une vitesse de vent de \textbf{2,4 km/h} provoque la fermeture de l'interrupteur une fois par seconde.
@@ -243,7 +262,7 @@ Le capteur de direction du vent, ou \textbf{girouette}, est le plus complexe des
 
 Les valeurs de résistance pour toutes les 16 positions possibles sont données dans le tableau du document source. Les valeurs de résistance pour les positions intermédiaires sont le résultat de deux résistances adjacentes connectées en parallèle lorsque l'aimant de la girouette active deux interrupteurs simultanément.
 
-\subsection{Capteur de pluie}
+\subsubsection{Pluviomètre}
 Le capteur de pluie utilise le principe du \textbf{« tipping bucket »}, aussi appelé \textbf{auget basculeur}. Ce type de pluviomètre est constitué de deux petits récipients montés sur un axe horizontal. Lorsqu'un récipient est rempli par l'eau de pluie, il bascule sous son poids, vidant son contenu et permettant à l'autre récipient de se remplir. Chaque basculement ferme un contact électrique qui peut être enregistré par un compteur numérique ou une interruption de microcontrôleur.
 
 \subsection*{Récupération des données de pluviométrie avec le STM32}
@@ -256,181 +275,150 @@ Pour récupérer l'information de pluviométrie avec le \textbf{STM32}, il faut 
 \end{itemize}
 
 Chaque basculement correspond à une quantité de pluie précise. Dans ce cas, chaque basculement de l'auget représente \textbf{0,2794 mm} de pluie.
+
+\section{Analyse préliminaire}
+Afin que tout fonctionne au mieux, on a eu plusieurs séances de travail en groupe pour bien comprendre le fonctionnement de chaque capteur et de la carte STM32F746G DIscovery.
+Voici les questions principales auxquelles on a répondu lors de ces séances de travail :
+\begin{itemize}
+    \item Comment fonctionne chaque capteur ?
+    \item Comment sont-ils connectés à la carte STM32 ?
+    \item Combien de timers seront utilsés? A quoi vont servir ces timers?
+    \item Quelles sont les fonctionnalités nécessaires pour l'interface utilisateur?
+    \item Comment stocker les données sur la carte SD?
+    \item Que souhaite t-on afficher sur l'écran LCD?
+    \item Comment gérer les interruptions pour les capteurs de vitesse et de pluie?
+    \item Tout doit fonctionner à quelle fréquence?
+    \item Quel sera la fréquence pour chaque timer?
+    \item Comment gérer les erreurs?
+\end{itemize}
+
+Après avoir répondu à ces questions, nous avons défini le prototype de notre interface utilisateur :
+
+\begin{figure}[H]
+    \capstart
+    \centering
+    \includegraphics[width=0.8\textwidth]{./images/prototype_interface.png}
+    \caption{Interface utilisateur}
+    \label{fig:interface}
+\end{figure}
+
+Notre interface utilisateur est divisée en cinq parties principales :
+\begin{itemize}
+    \item L'écran principal : affichage des grandeurs mesurées en temps réel
+    \item Deux pages qui affichent les valeurs en temps réel des capteurs
+    \item L'écran configuration qui permet de configurer la date et l'heure
+    \item La page des informations qui affiche les informations sur le projet
+    \item La page des statistiques qui affiche les valeurs moyennes sur 24h
+\end{itemize}
+
+Une fois cette interface définie, nous avons pu commencer à travailler sur les différents diagrammes de flot de données, de flot d'événements et de GRAFCET.
+\subsection{Organisation du système}
+Le système peut être divisé en trois sous-systèmes principaux interagissant entre eux :
+\begin{itemize}
+    \item \textbf{Système d'acquisition} : gestion des capteurs et conversion des données
+    \item \textbf{Système de traitement} : traitement des données et gestion des interruptions
+    \item \textbf{Système d'interface} : affichage LCD et stockage SD
+\end{itemize}
+
+\subsection{Diagramme des bords du modèle}
+Le diagramme des bords du modèle montre les interactions entre le STM32 et ses périphériques externes :
+
+[Insérer votre diagramme des bords du modèle ici]
+
+Les principaux éléments sont :
+\begin{itemize}
+    \item \textbf{Capteurs I2C} : HTS221 (température/humidité) et LPS22HH (pression)
+    \item \textbf{Capteurs à impulsions} : anémomètre et pluviomètre
+    \item \textbf{Capteur analogique} : girouette
+    \item \textbf{Interface utilisateur} : écran LCD
+    \item \textbf{Stockage} : carte SD
+\end{itemize}
+
+\subsection{Diagramme de flot de données}
+Le diagramme de flot de données illustre le cheminement des données à travers le système :
+
+[Insérer votre diagramme de flot de données ici]
+
+Les principales transformations sont :
+\begin{itemize}
+    \item Acquisition des données brutes des capteurs
+    \item Conversion et mise en forme des données
+    \item Calcul des moyennes et statistiques
+    \item Formatage pour affichage et stockage
+\end{itemize}
+
+\subsection{Diagramme de flot d'événements}
+Le diagramme de flot d'événements montre la séquence des événements système :
+
+[Insérer votre diagramme de flot d'événements ici]
+
+Les principaux événements sont :
+\begin{itemize}
+    \item Interruptions des capteurs à impulsions
+    \item Timers d'échantillonnage
+    \item Événements utilisateur (interface LCD)
+    \item Événements de stockage SD
+\end{itemize}
+
+\subsection{Machine d'états / GRAFCET}
+La machine d'états globale du système comprend les états suivants :
+
+[Insérer votre machine d'états ici]
+
+Les principaux états sont :
+\begin{itemize}
+    \item Initialisation du système
+    \item Acquisition des données
+    \item Traitement et mise à jour
+    \item Gestion des erreurs
+\end{itemize}
+
+\subsection{Table des interruptions et priorités}
+\begin{table}[H]
+\centering
+\caption{Priorités des interruptions}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Source} & \textbf{Priorité} & \textbf{Description} & \textbf{Utilisation} \\
+\hline
+EXTI Anémomètre & Haute & Mesure vitesse vent & Comptage impulsions \\
+\hline
+EXTI Pluviomètre & Haute & Mesure pluie & Comptage basculements \\
+\hline
+Timer Échantillonnage & Moyenne & Lecture capteurs I2C & Acquisition périodique \\
+\hline
+Timer LCD & Basse & Rafraîchissement écran & Mise à jour affichage \\
+\hline
+SDIO & Moyenne & Accès carte SD & Stockage données \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Intégration et validation finale}
+[À compléter]
+
+\section{Tableau récapitulatif des fonctionnalités}
+Ce tableau résume les tâches affectées à chaque membre de l'équipe et leur état d'avancement.
+
+\begin{table}[htbp]
+    \centering
+    \resizebox{\textwidth}{!}{  % Cette ligne permet d'ajuster le tableau à la largeur de la page
+        \begin{tabular}{|p{0.25\textwidth}|p{0.25\textwidth}|p{0.15\textwidth}|p{0.15\textwidth}|}
+            \hline
+            Nom Prénom & Tâche affectée & Tâche effectuée & Implantée version courante \\
+            \hline
+            Maxime MORET & Implémentation des capteurs & Oui & Oui \\
+            \hline
+            Koundeme Nobel DJESSOU & Développement de l'interface & Oui & Oui \\
+            \hline
+            Tristan GROUSSARD & Schématisation Flow de données,Flow d'événements et GRAFCET & Oui & Oui \\
+            \hline
+        \end{tabular}
+    }
+    \caption{Tâches affectées et effectuées}
+    \label{table:2}
+\end{table}
 \newpage
-
-\section{Développement et validation unitaire}
-
-\subsection{Stratégie de test}
-Avant l'intégration complète du système, chaque composant a été testé individuellement pour garantir son bon fonctionnement. Cette approche nous a permis de :
-\begin{itemize}
-    \item Valider le fonctionnement de chaque capteur individuellement
-    \item Identifier et corriger les problèmes au plus tôt
-    \item Établir une base solide pour l'intégration finale
-\end{itemize}
-
-\subsection{Capteurs environnementaux (HTS221 et LPS22HH)}
-\subsubsection{Configuration}
-La communication avec ces capteurs est réalisée via le bus I2C1. Voici les étapes de validation :
-\begin{enumerate}
-    \item Test de présence des capteurs sur le bus I2C
-    \item Configuration des registres de contrôle
-    \item Validation de la récupération des données
-\end{enumerate}
-
-\subsubsection{Tests réalisés}
-\begin{itemize}
-    \item Lecture des identifiants des capteurs
-    \item Vérification de la cohérence des mesures
-    \item Test de la fréquence d'échantillonnage
-\end{itemize}
-
-[Insérer capture d'écran du terminal montrant les mesures]
-
-\subsection{Anémomètre et Girouette}
-\subsubsection{Configuration matérielle}
-L'anémomètre nécessite :
-\begin{itemize}
-    \item Une entrée GPIO configurée en interruption externe
-    \item Une résistance de pull-up pour stabiliser le signal
-\end{itemize}
-
-\subsubsection{Validation}
-Tests effectués à l'aide d'un oscilloscope et du logiciel Analog Discovery :
-\begin{itemize}
-    \item Mesure de la fréquence des impulsions
-    \item Validation de la conversion fréquence/vitesse
-    \item Test des 16 positions de la girouette
-\end{itemize}
-
-[Insérer capture d'écran de l'oscilloscope]
-
-\subsection{Pluviomètre}
-\subsubsection{Configuration matérielle}
-Le pluviomètre de type "tipping bucket" nécessite :
-\begin{itemize}
-    \item Une entrée GPIO configurée en interruption externe
-    \item Une résistance de pull-up interne activée
-    \item Configuration de l'antirebond logiciel
-\end{itemize}
-
-\subsubsection{Tests de validation}
-\begin{itemize}
-    \item Test unitaire avec simulation manuelle des basculements
-    \item Vérification du comptage des impulsions
-    \item Validation de la conversion (0,2794 mm par basculement)
-    \item Test de l'antirebond
-\end{itemize}
-
-\subsection{Interface utilisateur LCD}
-\subsubsection{Configuration}
-\begin{itemize}
-    \item Initialisation du contrôleur LTDC
-    \item Configuration de la résolution (480x272)
-    \item Configuration du format de couleur (RGB565)
-\end{itemize}
-
-\subsubsection{Tests effectués}
-\begin{itemize}
-    \item Test d'affichage des caractères
-    \item Validation du rafraîchissement de l'écran
-    \item Test des différentes zones d'affichage
-    \item Vérification du contraste et de la lisibilité
-\end{itemize}
-
-[Insérer capture d'écran de l'interface]
-
-\subsection{Stockage sur carte SD}
-\subsubsection{Configuration}
-\begin{itemize}
-    \item Initialisation du contrôleur SDMMC en mode 4 bits
-    \item Configuration du système de fichiers FAT via FatFS
-    \item Configuration du DMA pour les transferts
-\end{itemize}
-
-\subsubsection{Validation}
-\begin{itemize}
-    \item Test de création de fichiers
-    \item Validation de l'écriture et lecture des données
-    \item Test de performance en écriture continue
-    \item Vérification de l'intégrité des données
-\end{itemize}
-
-[Insérer capture d'écran du contenu d'un fichier de log]
-
-\subsection{Communication radio}
-\subsubsection{Configuration matérielle}
-\begin{itemize}
-    \item Configuration du module radio 
-    \item Paramétrage du débit et de la puissance d'émission
-    \item Configuration du protocole de communication
-\end{itemize}
-
-\subsubsection{Tests de validation}
-\begin{itemize}
-    \item Test de portée
-    \item Validation de la fiabilité de la transmission
-    \item Test de la consommation énergétique
-    \item Vérification de l'intégrité des données transmises
-\end{itemize}
-
-[Insérer capture d'écran des données reçues]
-
-\section{Développement et validation des éléments d'assemblage}
-
-\subsection{Agrégation des mesures}
-\subsubsection{Architecture logicielle}
-L'agrégation des mesures a été implémentée selon une architecture à trois niveaux :
-\begin{itemize}
-    \item Niveau acquisition : lecture des capteurs avec gestion des temporisations
-    \item Niveau traitement : moyennage et filtrage des données
-    \item Niveau stockage : formatage et sauvegarde des données
-\end{itemize}
-
-\subsubsection{Stratégie d'échantillonnage}
-\begin{itemize}
-    \item Capteurs I2C (température, humidité, pression) : échantillonnage périodique (1Hz)
-    \item Anémomètre : calcul de la vitesse sur fenêtre glissante de 5 secondes
-    \item Pluviomètre : cumul sur période configurable (heure/jour)
-    \item Horodatage via RTC pour chaque série de mesures
-\end{itemize}
-
-\subsubsection{Tests d'intégration}
-\begin{itemize}
-    \item Validation de la synchronisation des mesures
-    \item Test de charge (acquisition continue sur 24h)
-    \item Vérification de la cohérence temporelle des données
-    \item Test des mécanismes de reprise sur erreur
-\end{itemize}
-
-\subsection{Gestion de l'IHM}
-\subsubsection{Organisation de l'interface}
-L'interface utilisateur a été conçue pour être intuitive et fonctionnelle :
-\begin{itemize}
-    \item Écran principal : affichage en temps réel des mesures courantes
-    \item Écran statistiques : valeurs min/max/moyennes sur 24h
-    \item Écran configuration : paramètres système et calibration
-    \item Zone d'état : indication des erreurs et état du système
-\end{itemize}
-
-[Insérer capture d'écran de l'interface principale]
-
-\subsubsection{Gestion des événements}
-\begin{itemize}
-    \item Rafraîchissement périodique des valeurs (1Hz)
-    \item Gestion des alertes (dépassement de seuils)
-    \item Historique des événements remarquables
-    \item Interface de configuration des paramètres
-\end{itemize}
-
-\subsubsection{Tests de validation}
-\begin{itemize}
-    \item Test de réactivité de l'interface
-    \item Validation du comportement avec charge CPU importante
-    \item Test des différents scénarios d'utilisation
-    \item Vérification de la persistance des paramètres
-\end{itemize}
-
 \nsection{Conclusion}
-
 Ce projet a été d'une grande richesse en termes d'apprentissage. Il nous a permis de mettre en pratique les connaissances acquises en cours de systèmes embarqués. Nous avons pu découvrir les différentes étapes de la conception d'un système embarqué, de la spécification des besoins à la réalisation du système en passant par la conception et la programmation.
 \end{document}
