@@ -1,0 +1,9 @@
+../Core/Src/Nucleo_HumTemp_I2C.c:54:7:linear_interpolation	1
+../Core/Src/Nucleo_HumTemp_I2C.c:62:6:init_HumTemp	2
+../Core/Src/Nucleo_HumTemp_I2C.c:91:6:valeur_Hum	4
+../Core/Src/Nucleo_HumTemp_I2C.c:116:6:valeur_TempH	2
+../Core/Src/Nucleo_HumTemp_I2C.c:137:6:valeur_graph_TempH	2
+../Core/Src/Nucleo_HumTemp_I2C.c:160:6:value_humidity_graph	2
+../Core/Src/Nucleo_HumTemp_I2C.c:178:16:platform_write_hts221	1
+../Core/Src/Nucleo_HumTemp_I2C.c:185:16:platform_read_hts221	1
+../Core/Src/Nucleo_HumTemp_I2C.c:192:13:platform_delay_hts221	1

@@ -1,0 +1,17 @@
+../Core/Src/Interface.c:38:6:getRTCTimeStr	16	static
+../Core/Src/Interface.c:48:10:get_current_time_from_rtc	40	static
+../Core/Src/Interface.c:61:10:get_current_time_in_seconds	8	static
+../Core/Src/Interface.c:67:6:date_Heure	40	static
+../Core/Src/Interface.c:85:6:drawMenuPage	8	static
+../Core/Src/Interface.c:141:6:drawCreditsPage	8	static
+../Core/Src/Interface.c:170:6:drawTempHumidRainPage	32	static
+../Core/Src/Interface.c:220:6:drawWindDirPressurePage	56	static
+../Core/Src/Interface.c:270:6:drawSettingsPage	48	static
+../Core/Src/Interface.c:353:6:drawTempHumGraphPage	16	static
+../Core/Src/Interface.c:396:6:drawRainPressGraphPage	16	static
+../Core/Src/Interface.c:465:6:draw_temperature_graph	96	static
+../Core/Src/Interface.c:533:6:update_temperature_graph	24	static
+../Core/Src/Interface.c:560:6:draw_humidity_graph	104	static
+../Core/Src/Interface.c:628:6:update_humidity_graph	24	static
+../Core/Src/Interface.c:654:6:draw_pressure_graph	96	static
+../Core/Src/Interface.c:736:6:update_pressure_graph	24	static
