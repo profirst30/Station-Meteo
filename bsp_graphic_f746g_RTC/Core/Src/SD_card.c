@@ -5,76 +5,80 @@
  *      Author: Maxime
  */
 
-//#include "SD_card.h"
+#include "SD_card.h"
+#include "Nucleo_HumTemp_I2C.h"
+#include "Nucleo_Pression_I2C.h"
 
-/*void register_SD_CARD(int *array, int size) {
-    //-1- Link the micro SD disk I/O driver//
-    // if(FATFS_LinkDriver(&SD_Driver, SDPath) == 0)
-    // {
 
-    ///-2- Register the file system object to the FatFs module ///
-    if (f_mount(&SDFatFS, (TCHAR const *)SDPath, 0) != FR_OK) {
-        // FatFs Initialization Error //
-        Error_Handler();
-    } else {
-        //-3- Create a FAT file system (format) on the logical drive //
-        // WARNING: Formatting the uSD card will delete all content on the device //
-        if (f_mkfs((TCHAR const *)SDPath, FM_ANY, 0, workBuffer, sizeof(workBuffer)) != FR_OK) {
-            printf("Formatting failed\n");
-            // FatFs Format Error //
-            Error_Handler();
-        } else {
-            //-4- Create and Open a new text file object with write access //
-            if (f_open(&SDFile, "temp.csv", FA_CREATE_ALWAYS | FA_WRITE) != FR_OK) {
-                printf("File opening for writing failed\n");
-                // 'test.csv' file Open for write Error //
-                Error_Handler();
-            } else {
-                //-5- Write array data along with RTC time to the CSV file //
-                char buffer[100];
-                UINT byteswritten;
-                FRESULT res;
+// Variables globales
+FATFS fs;
+FIL fil_temp, fil_hum, fil_press;
+uint8_t sd_logging_enabled = 0;
+extern float humidity_perc;
+extern float temperature_degC;
 
-                // Write CSV header //
-                snprintf(buffer, sizeof(buffer), "Year/Month/Day;Hour:Minute:Second;Value\n");
-                res = f_write(&SDFile, buffer, strlen(buffer), (void *)&byteswritten);
-                if ((byteswritten == 0) || (res != FR_OK)) {
-                    printf("Error writing header to file\n");
-                    Error_Handler();
-                }
+// Initialisation du système d'enregistrement
+FRESULT init_sd_logging(void) {
+    FRESULT res;
 
-                for (int i = 0; i < size; i++) {
-                    // Fetch RTC time //
-                    RTC_TimeTypeDef sTime;
-                    RTC_DateTypeDef sDate;
+    // Monter le système de fichiers
+    res = f_mount(&fs, "", 1);
+    if (res != FR_OK) {
+        printf("Erreur montage SD: %d\r\n", res);
+        return res;
+    }
 
-                    HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
-                    HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+    // Ouvrir/créer les fichiers avec en-têtes si nouveaux
+    const char* files[] = {"temp.csv", "hum.csv", "press.csv"};
+    FIL* files_handle[] = {&fil_temp, &fil_hum, &fil_press};
 
-                    // Format data into CSV row //
-                    snprintf(buffer, sizeof(buffer), "%04d/%02d/%02d;%02d:%02d:%02d;%d\n",
-                             2000 + sDate.Year, sDate.Month, sDate.Date, sTime.Hours, sTime.Minutes, sTime.Seconds, array[i]);
-
-                    res = f_write(&SDFile, buffer, strlen(buffer), (void *)&byteswritten);
-
-                    if ((byteswritten == 0) || (res != FR_OK)) {
-                        printf("Error writing to file\n");
-                        // 'test.csv' file Write or EOF Error //
-                        Error_Handler();
-                        break;
-                    }
-                }
-
-                //-6- Close the open text file //
-                f_close(&SDFile);
-
-                printf("Data written to CSV successfully\n");
+    for(int i = 0; i < 3; i++) {
+        res = f_open(files_handle[i], files[i], FA_WRITE | FA_OPEN_ALWAYS);
+        if (res == FR_OK) {
+            if(f_size(files_handle[i]) == 0) {
+                f_printf(files_handle[i], "Date,Time,Value\n");
             }
+            f_close(files_handle[i]);
+        } else {
+            printf("Erreur ouverture %s: %d\r\n", files[i], res);
+            return res;
         }
     }
 
-    FATFS_UnLinkDriver(SDPath);
+    sd_logging_enabled = 1;
+    printf("Système d'enregistrement initialisé\r\n");
+    return FR_OK;
 }
-*/
+
+// Fonction d'enregistrement appelée par l'interruption du timer
+void log_weather_data(void) {
+    if(!sd_logging_enabled) return;
+
+    WeatherData_t data;
+    char buffer[100];
+    UINT bw;
+
+    // Récupérer l'heure et la date
+    HAL_RTC_GetTime(&hrtc, &data.time, RTC_FORMAT_BIN);
+    HAL_RTC_GetDate(&hrtc, &data.date, RTC_FORMAT_BIN);
+
+    // Récupérer les mesures (utiliser vos fonctions existantes)
+    data.temperature = temperature_degC;  // Votre variable globale existante
+    data.humidity = humidity_perc;        // Votre variable globale existante
+    //data.pressure = pressure_hPa;         // Votre variable globale existante
+
+    // Enregistrer température
+    f_open(&fil_temp, "temp.csv", FA_WRITE | FA_OPEN_EXISTING);
+    f_lseek(&fil_temp, f_size(&fil_temp));
+    sprintf(buffer, "20%02d-%02d-%02d,%02d:%02d:%02d,%.2f\n",
+            data.date.Year, data.date.Month, data.date.Date,
+            data.time.Hours, data.time.Minutes, data.time.Seconds,
+            data.temperature);
+    f_write(&fil_temp, buffer, strlen(buffer), &bw);
+    f_close(&fil_temp);
+
+    // Même chose pour humidité et pression...
+    // [Code similaire pour les autres fichiers]
+}
 
 

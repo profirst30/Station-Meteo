@@ -277,7 +277,7 @@ Pour récupérer l'information de pluviométrie avec le \textbf{STM32}, il faut 
 Chaque basculement correspond à une quantité de pluie précise. Dans ce cas, chaque basculement de l'auget représente \textbf{0,2794 mm} de pluie.
 
 \section{Analyse préliminaire}
-Afin que tout fonctionne au mieux, on a eu plusieurs séances de travail en groupe pour bien comprendre le fonctionnement de chaque capteur et de la carte STM32F746G DIscovery.
+Afin que tout fonctionne au mieux, on a eu plusieurs séances de travail en groupe pour bien comprendre le fonctionnement de chaque capteur et de la carte STM32F746G Discovery.
 Voici les questions principales auxquelles on a répondu lors de ces séances de travail :
 \begin{itemize}
     \item Comment fonctionne chaque capteur ?
@@ -393,6 +393,107 @@ SDIO & Moyenne & Accès carte SD & Stockage données \\
 \hline
 \end{tabular}
 \end{table}
+
+
+\section{Développement et validation unitaire}
+
+\subsection{Stratégie de test}
+Avant l'intégration complète du système, chaque composant a été testé individuellement pour garantir son bon fonctionnement. Cette approche nous a permis de :
+\begin{itemize}
+    \item Valider le fonctionnement de chaque capteur individuellement
+    \item Identifier et corriger les problèmes au plus tôt
+    \item Établir une base solide pour l'intégration finale
+\end{itemize}
+
+\subsection{Capteurs environnementaux (HTS221 et LPS22HH)}
+\subsubsection{Configuration}
+La communication avec ces capteurs est réalisée via le bus I2C1. Voici les étapes de validation :
+\begin{enumerate}
+    \item Test de présence des capteurs sur le bus I2C
+    \item Configuration des registres de contrôle
+    \item Validation de la récupération des données
+\end{enumerate}
+
+\subsubsection{Tests réalisés}
+\begin{itemize}
+    \item Lecture des identifiants des capteurs
+    \item Vérification de la cohérence des mesures
+    \item Test de la fréquence d'échantillonnage
+\end{itemize}
+
+[Insérer capture d'écran du terminal montrant les mesures]
+
+\subsection{Anémomètre et Girouette}
+\subsubsection{Configuration matérielle}
+L'anémomètre nécessite :
+\begin{itemize}
+    \item Une entrée GPIO configurée en interruption externe
+    \item Une résistance de pull-up pour stabiliser le signal
+\end{itemize}
+
+\subsubsection{Validation}
+Tests effectués à l'aide d'un oscilloscope et du logiciel Analog Discovery :
+\begin{itemize}
+    \item Mesure de la fréquence des impulsions
+    \item Validation de la conversion fréquence/vitesse
+    \item Test des 16 positions de la girouette
+\end{itemize}
+
+[Insérer capture d'écran de l'oscilloscope]
+
+\subsection{Pluviomètre}
+\subsubsection{Configuration matérielle}
+Le pluviomètre de type "tipping bucket" nécessite :
+\begin{itemize}
+    \item Une entrée GPIO configurée en interruption externe
+    \item Une résistance de pull-up interne activée
+    \item Configuration de l'antirebond logiciel
+\end{itemize}
+
+\subsubsection{Tests de validation}
+\begin{itemize}
+    \item Test unitaire avec simulation manuelle des basculements
+    \item Vérification du comptage des impulsions
+    \item Validation de la conversion (0,2794 mm par basculement)
+    \item Test de l'antirebond
+\end{itemize}
+
+\subsection{Interface utilisateur LCD}
+\subsubsection{Configuration}
+\begin{itemize}
+    \item Initialisation du contrôleur LTDC
+    \item Configuration de la résolution (480x272)
+    \item Configuration du format de couleur (RGB565)
+\end{itemize}
+
+\subsubsection{Tests effectués}
+\begin{itemize}
+    \item Test d'affichage des caractères
+    \item Validation du rafraîchissement de l'écran
+    \item Test des différentes zones d'affichage
+    \item Vérification du contraste et de la lisibilité
+\end{itemize}
+
+[Insérer capture d'écran de l'interface]
+
+\subsection{Stockage sur carte SD}
+\subsubsection{Configuration}
+\begin{itemize}
+    \item Initialisation du contrôleur SDMMC en mode 4 bits
+    \item Configuration du système de fichiers FAT via FatFS
+    \item Configuration du DMA pour les transferts
+\end{itemize}
+
+\subsubsection{Validation}
+\begin{itemize}
+    \item Test de création de fichiers
+    \item Validation de l'écriture et lecture des données
+    \item Test de performance en écriture continue
+    \item Vérification de l'intégrité des données
+\end{itemize}
+
+[Insérer capture d'écran du contenu d'un fichier de log]
+
 
 \section{Intégration et validation finale}
 [À compléter]

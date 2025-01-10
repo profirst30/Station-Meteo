@@ -1,4 +1,4 @@
-Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
+Core/Src/dma.o: ../Core/Src/dma.c ../Core/Inc/dma.h ../Core/Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
  ../Core/Inc/stm32f7xx_hal_conf.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
@@ -39,31 +39,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
- ../Core/Inc/adc.h ../Core/Inc/main.h ../Core/Inc/dma.h \
- ../Core/Inc/dma2d.h ../FATFS/App/fatfs.h \
- ../Middlewares/Third_Party/FatFs/src/ff.h \
- ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
- ../FATFS/Target/bsp_driver_sd.h ../FATFS/Target/fatfs_platform.h \
- ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
- ../Middlewares/Third_Party/FatFs/src/diskio.h \
- ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
- ../Core/Inc/i2c.h ../Core/Inc/ltdc.h ../Core/Inc/rtc.h \
- ../Core/Inc/sdmmc.h ../Core/Inc/tim.h ../Core/Inc/usart.h \
- ../Core/Inc/gpio.h ../Core/Inc/fmc.h \
- ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h \
- ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h \
- ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_lcd.h \
- ../Drivers/BSP/STM32746G-Discovery/../Components/rk043fn48h/rk043fn48h.h \
- ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h \
- ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h \
- ../Drivers/BSP/STM32746G-Discovery/../../../Utilities/Fonts/fonts.h \
- ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_ts.h \
- ../Drivers/BSP/STM32746G-Discovery/../Components/ft5336/ft5336.h \
- ../Drivers/BSP/STM32746G-Discovery/../Components/ft5336/../Common/ts.h \
- ../Core/Inc/Interface.h ../Core/Inc/Nucleo_HumTemp_I2C.h \
- ../Drivers/User/hts221_reg.h ../Core/Inc/Nucleo_Pression_I2C.h \
- ../Drivers/User/lps22hh_reg.h
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h
+../Core/Inc/dma.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 ../Core/Inc/stm32f7xx_hal_conf.h:
@@ -106,40 +83,3 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
-../Core/Inc/adc.h:
-../Core/Inc/main.h:
-../Core/Inc/dma.h:
-../Core/Inc/dma2d.h:
-../FATFS/App/fatfs.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../Middlewares/Third_Party/FatFs/src/integer.h:
-../FATFS/Target/ffconf.h:
-../FATFS/Target/bsp_driver_sd.h:
-../FATFS/Target/fatfs_platform.h:
-../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
-../Middlewares/Third_Party/FatFs/src/diskio.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../FATFS/Target/sd_diskio.h:
-../Core/Inc/i2c.h:
-../Core/Inc/ltdc.h:
-../Core/Inc/rtc.h:
-../Core/Inc/sdmmc.h:
-../Core/Inc/tim.h:
-../Core/Inc/usart.h:
-../Core/Inc/gpio.h:
-../Core/Inc/fmc.h:
-../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h:
-../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h:
-../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_lcd.h:
-../Drivers/BSP/STM32746G-Discovery/../Components/rk043fn48h/rk043fn48h.h:
-../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h:
-../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h:
-../Drivers/BSP/STM32746G-Discovery/../../../Utilities/Fonts/fonts.h:
-../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_ts.h:
-../Drivers/BSP/STM32746G-Discovery/../Components/ft5336/ft5336.h:
-../Drivers/BSP/STM32746G-Discovery/../Components/ft5336/../Common/ts.h:
-../Core/Inc/Interface.h:
-../Core/Inc/Nucleo_HumTemp_I2C.h:
-../Drivers/User/hts221_reg.h:
-../Core/Inc/Nucleo_Pression_I2C.h:
-../Drivers/User/lps22hh_reg.h:

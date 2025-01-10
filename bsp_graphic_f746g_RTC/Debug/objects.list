@@ -6,6 +6,7 @@
 "./Core/Src/Wind_Dir_Sparkfun.o"
 "./Core/Src/Wind_Speed_Sparkfun.o"
 "./Core/Src/adc.o"
+"./Core/Src/dma.o"
 "./Core/Src/dma2d.o"
 "./Core/Src/fmc.o"
 "./Core/Src/gpio.o"

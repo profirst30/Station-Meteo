@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "dma.h"
 #include "dma2d.h"
 #include "fatfs.h"
 #include "i2c.h"
@@ -77,6 +78,9 @@ int debounce = 0; // Debounce flag
 
 extern uint8_t minute_flag;  // Flag pour indiquer que 1 minute est écoulée
 uint8_t I2c_Flag=0;
+//Pour la carte externe
+volatile uint16_t timer_15min_counter = 0;
+const uint16_t TIMER_15MIN_MAX = 60; // 15 minutes = 900 secondes
 
 /* USER CODE END PV */
 
@@ -153,6 +157,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_DMA2D_Init();
   MX_FMC_Init();
   MX_LTDC_Init();
@@ -179,6 +184,7 @@ int main(void)
 
   init_HumTemp();
   init_Pression();
+  init_sd_logging();
   //BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
   TouchTimer_Init();
 
@@ -578,9 +584,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
   //capteur I2C
   if(htim->Instance == TIM7) {
-  	  // Timer 1 minute atteint
-  	  I2c_Flag=1; // Activer le flag indiquant la fin de 1 minute
-    }
+      timer_15min_counter++;
+      printf("Counter: %d\n", timer_15min_counter);  // Debug
+
+      if(timer_15min_counter >= TIMER_15MIN_MAX) {
+          printf("Tentative d'enregistrement...\n");  // Debug
+          log_weather_data();
+          timer_15min_counter = 0;
+      }
+  }
   /* USER CODE END Callback 1 */
 }
 

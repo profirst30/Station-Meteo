@@ -30,8 +30,8 @@ const uint16_t startY = 80;  // Ajusté pour centrer verticalement
 
 static int16_t data_raw_humidity;
 static int16_t data_raw_temperature;
-static float humidity_perc;
-static float temperature_degC;
+volatile float humidity_perc;
+volatile float temperature_degC;
 static uint8_t whoamI;
 static uint8_t tx_buffer[1000];
 stmdev_ctx_t dev_ctx1;
@@ -113,18 +113,25 @@ void valeur_Hum(void) {
 
 
 // Fonction principale pour lire les données et les afficher
-void valeur_TempH(void){
+void valeur_TempH(void) {
+    // Ajouter un debug print
+    printf("Reading temperature...\n");
 
-	hts221_reg_t reg1;
-	hts221_status_get(&dev_ctx1, &reg1.status_reg);
+    hts221_reg_t reg1;
+    hts221_status_get(&dev_ctx1, &reg1.status_reg);
     if (reg1.status_reg.t_da) {
         memset(&data_raw_temperature, 0x00, sizeof(int16_t));
         hts221_temperature_raw_get(&dev_ctx1, &data_raw_temperature);
         temperature_degC = linear_interpolation(&lin_temp, data_raw_temperature);
         snprintf((char *)tx_buffer, sizeof(tx_buffer), "%6.2f deg", temperature_degC);
-        //printf((char const *)tx_buffer);
+
+        // Debug print
+        printf("Temperature: %6.2f deg\n", temperature_degC);
+
         BSP_LCD_SetFont(&Font16);
         BSP_LCD_DisplayStringAt(startX+2, startY + 70, (uint8_t*)tx_buffer, LEFT_MODE);
+    } else {
+        printf("Temperature data not available\n");
     }
 }
 

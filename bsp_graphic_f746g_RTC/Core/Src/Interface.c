@@ -387,10 +387,6 @@ void drawTempHumGraphPage(void) {
     // Colonne 3 (gouttes)
     BSP_LCD_DrawBitmap(5*480/6 - 16, iconY, (uint8_t *)rain_icon_bmp);
 
-    // ===== Zone pour les graphiques =====
-    // TODO: Ajouter les graphiques dans chaque colonne
-
-
 }
 
 void drawRainPressGraphPage(void) {
@@ -428,10 +424,6 @@ void drawRainPressGraphPage(void) {
 
     // Colonne 3 (gouttes)
     BSP_LCD_DrawBitmap(5*480/6 - 16, iconY, (uint8_t *)rain_icon_bmp);
-
-    // ===== Zone pour les graphiques =====
-    // TODO: Ajouter les graphiques dans chaque colonne
-
 }
 
 
