@@ -19,27 +19,27 @@
 \contentsline {subsection}{\numberline {3.1}Organisation du système}{5}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Diagramme des bords du modèle}{6}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Diagramme de flot de données}{6}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Diagramme de flot d'événements}{6}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Machine d'états / GRAFCET}{6}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Table des interruptions et priorités}{7}{subsection.3.6}%
-\contentsline {section}{\numberline {4}Développement et validation unitaire}{7}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Stratégie de test}{7}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Capteurs environnementaux (HTS221 et LPS22HH)}{7}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Configuration}{7}{subsubsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Tests réalisés}{7}{subsubsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.3}Anémomètre et Girouette}{7}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Configuration matérielle}{7}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Validation}{8}{subsubsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.4}Pluviomètre}{8}{subsection.4.4}%
-\contentsline {subsubsection}{\numberline {4.4.1}Configuration matérielle}{8}{subsubsection.4.4.1}%
-\contentsline {subsubsection}{\numberline {4.4.2}Tests de validation}{8}{subsubsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.5}Interface utilisateur LCD}{8}{subsection.4.5}%
-\contentsline {subsubsection}{\numberline {4.5.1}Configuration}{8}{subsubsection.4.5.1}%
-\contentsline {subsubsection}{\numberline {4.5.2}Tests effectués}{8}{subsubsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.6}Stockage sur carte SD}{8}{subsection.4.6}%
-\contentsline {subsubsection}{\numberline {4.6.1}Configuration}{8}{subsubsection.4.6.1}%
-\contentsline {subsubsection}{\numberline {4.6.2}Validation}{9}{subsubsection.4.6.2}%
-\contentsline {section}{\numberline {5}Intégration et validation finale}{9}{section.5}%
-\contentsline {section}{\numberline {6}Tableau récapitulatif des fonctionnalités}{9}{section.6}%
+\contentsline {subsection}{\numberline {3.4}Diagramme de flot d'événements}{7}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Machine d'états / GRAFCET}{7}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Table des interruptions et priorités}{8}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Développement et validation unitaire}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Stratégie de test}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Capteurs environnementaux (HTS221 et LPS22HH)}{8}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Configuration}{8}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Tests réalisés}{8}{subsubsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.3}Anémomètre et Girouette}{9}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Configuration matérielle}{9}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Validation}{9}{subsubsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.4}Pluviomètre}{9}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Configuration matérielle}{9}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Tests de validation}{9}{subsubsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.5}Interface utilisateur LCD}{9}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Configuration}{9}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.2}Tests effectués}{9}{subsubsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.6}Stockage sur carte SD}{10}{subsection.4.6}%
+\contentsline {subsubsection}{\numberline {4.6.1}Configuration}{10}{subsubsection.4.6.1}%
+\contentsline {subsubsection}{\numberline {4.6.2}Validation}{10}{subsubsection.4.6.2}%
+\contentsline {section}{\numberline {5}Intégration et validation finale}{10}{section.5}%
+\contentsline {section}{\numberline {6}Tableau récapitulatif des fonctionnalités}{10}{section.6}%
 \contentsline {section}{\numberline {7}Tableau récapitulatif des fonctionnalités}{10}{section.7}%
-\contentsline {section}{Conclusion}{11}{section*.14}%
+\contentsline {section}{Conclusion}{13}{section*.18}%
