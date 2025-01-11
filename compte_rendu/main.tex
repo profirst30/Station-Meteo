@@ -120,9 +120,9 @@ Ces mesures seront affichées et stockées directement sur la station (en utilis
     \hline
     Anémomètre & Entrée & GPIO & PC6 & 2,4km/h = 1Hz \\
     \hline
-    Girouette & Entrée & ADC & PA0 & 16 positions (0-360°) \\
+    Girouette & Entrée & ADC & PA8 & 16 positions (0-360°) \\
     \hline
-    Pluviomètre & Entrée & GPIO & PC8 & 0,2794mm/impulsion \\
+    Pluviomètre & Entrée & GPIO & PA15 & 0,2794mm/impulsion \\
     \hline
     Écran LCD & Sortie & LTDC & 
     \begin{tabular}[c]{@{}l@{}}
@@ -175,20 +175,17 @@ La station météorologique doit répondre aux fonctionnalités suivantes :
     \begin{itemize}
         \item Valeurs courantes des capteurs
         \item Graphiques d'évolution
-        \item Statistiques journalières
     \end{itemize}
     \item Navigation entre différents écrans
     \begin{itemize}
         \item Écran principal des mesures
         \item Écrans détaillés par type de mesure
         \item Écran de configuration
-        \item Écran des statistiques
+        \item Écran des graphiques
     \end{itemize}
     \item Configuration système
     \begin{itemize}
         \item Réglage date et heure
-        \item Paramètres d'acquisition
-        \item Paramètres d'affichage
     \end{itemize}
 \end{itemize}
 
@@ -308,7 +305,7 @@ Notre interface utilisateur est divisée en cinq parties principales :
     \item Deux pages qui affichent les valeurs en temps réel des capteurs
     \item L'écran configuration qui permet de configurer la date et l'heure
     \item La page des informations qui affiche les informations sur le projet
-    \item La page des statistiques qui affiche les valeurs moyennes sur 24h
+    \item Les pages des graphiques
 \end{itemize}
 
 Une fois cette interface définie, nous avons pu commencer à travailler sur les différents diagrammes de flot de données, de flot d'événements et de GRAFCET.
