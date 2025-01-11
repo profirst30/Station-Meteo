@@ -499,6 +499,68 @@ Le pluviomètre de type "tipping bucket" nécessite :
 [À compléter]
 
 \section{Tableau récapitulatif des fonctionnalités}
+
+Ce tableau résume l'état de développement de chaque bloc fonctionnel du projet, ainsi que son état de validation et d'intégration.
+
+\begin{table}[htbp]
+    \centering
+    \caption{État des développements et validations}
+    \begin{tabular}{|p{0.25\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|}
+        \hline
+        \textbf{Bloc fonctionnel} & \textbf{Développement} & \textbf{Validation unitaire} & \textbf{Intégration} \\
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Capteurs}} \\
+        \hline
+        Température/Humidité (HTS221) & Effectué & Validé & Intégré \\
+        \hline
+        Pression (LPS22HH) & Effectué & Validé & Intégré \\
+        \hline
+        Anémomètre & Effectué & Validé & Intégré \\
+        \hline
+        Girouette & Effectué & Validé & Intégré \\
+        \hline
+        Pluviomètre & Effectué & Validé & Intégré \\
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Interface utilisateur}} \\
+        \hline
+        Écran d'accueil & Effectué & Validé & Intégré \\
+        \hline
+        Affichage des mesures & Effectué & Validé & Intégré \\
+        \hline
+        Graphiques temps réel & Effectué & Validé & Intégré \\
+        \hline
+        Configuration date/heure & Effectué & Validé & Intégré \\
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Stockage}} \\
+        \hline
+        Gestion carte SD & Effectué & Validé & Intégré \\
+        \hline
+        Sauvegarde des mesures & Effectué & Validé & Intégré \\
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Sous-parties d'assemblage}} \\
+        \hline
+        Agrégation des mesures & Effectué & Validé & Intégré \\
+        \hline
+        Gestion IHM & Effectué & Validé & Intégré \\
+        \hline
+        \multicolumn{4}{|c|}{\textbf{Intégration}} \\
+        \hline
+        Intégration finale & Effectué & Validé & Intégré \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Le tableau ci-dessus présente :
+\begin{itemize}
+    \item Chaque bloc fonctionnel identifié lors de la décomposition préliminaire
+    \item L'état de développement de chaque bloc
+    \item Le statut de la validation unitaire
+    \item L'état d'intégration dans l'application finale
+    \item Les sous-parties d'assemblage et l'intégration finale
+\end{itemize}
+
+
+\section{Tableau récapitulatif des fonctionnalités}
 Ce tableau résume les tâches affectées à chaque membre de l'équipe et leur état d'avancement.
 
 \begin{table}[htbp]
@@ -508,9 +570,19 @@ Ce tableau résume les tâches affectées à chaque membre de l'équipe et leur 
             \hline
             Nom Prénom & Tâche affectée & Tâche effectuée & Implantée version courante \\
             \hline
-            Maxime MORET & Implémentation des capteurs & Oui & Oui \\
+            Maxime MORET & Implémentation(lecture et agrégation) des capteurs I2C (Température,pluie,humidité) & Oui & Oui \\
             \hline
-            Koundeme Nobel DJESSOU & Développement de l'interface & Oui & Oui \\
+            Maxime MORET et Koundeme Nobel DJESSOU & Implémentation des capteurs de pluviométrie et de vent & Oui & Oui \\
+            \hline
+            Koundeme Nobel DJESSOU & Implémentation de l'interface utilisateur (pages de l'interface) & Oui & Oui \\
+            \hline
+            Koundeme Nobel DJESSOU & Implémentation de l'interaction de l'écran tactile(Partie 1) & Oui & Oui \\
+            \hline
+            Maxime MORET & Implémentation de l'interaction de l'écran tactile(Partie 2) & Oui & Oui \\
+            \hline
+            Koundeme Nobel DJESSOU & Implémentation de la RTC & Oui & Oui \\
+            \hline
+            Koundeme Nobel DJESSOU & Implémentation de la carte SD & Oui & Oui \\
             \hline
             Tristan GROUSSARD & Schématisation Flow de données,Flow d'événements et GRAFCET & Oui & Oui \\
             \hline
