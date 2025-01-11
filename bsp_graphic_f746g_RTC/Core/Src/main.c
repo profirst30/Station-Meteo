@@ -42,6 +42,7 @@
 #include "Interface.h"
 #include "Nucleo_HumTemp_I2C.h"
 #include "Nucleo_Pression_I2C.h"
+#include "SD_card.h"
 /*#include "Rain_Measure_Sparkfun.h"
 #include "Wind_Dir_Sparkfun.h"
 #include "Wind_Speed_Sparkfun.h"
@@ -185,6 +186,7 @@ int main(void)
   init_HumTemp();
   init_Pression();
   init_sd_logging();
+  HAL_TIM_Base_Start_IT(&htim7);
   //BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
   TouchTimer_Init();
 

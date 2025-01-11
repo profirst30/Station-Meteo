@@ -20,6 +20,9 @@ extern float temperature_degC;
 // Initialisation du système d'enregistrement
 FRESULT init_sd_logging(void) {
     FRESULT res;
+    uint32_t byteswritten;
+    FIL SDFile;
+    char header[] = "Date,Time,Value\n";
 
     // Monter le système de fichiers
     res = f_mount(&fs, "", 1);
@@ -28,57 +31,107 @@ FRESULT init_sd_logging(void) {
         return res;
     }
 
-    // Ouvrir/créer les fichiers avec en-têtes si nouveaux
-    const char* files[] = {"temp.csv", "hum.csv", "press.csv"};
-    FIL* files_handle[] = {&fil_temp, &fil_hum, &fil_press};
-
-    for(int i = 0; i < 3; i++) {
-        res = f_open(files_handle[i], files[i], FA_WRITE | FA_OPEN_ALWAYS);
-        if (res == FR_OK) {
-            if(f_size(files_handle[i]) == 0) {
-                f_printf(files_handle[i], "Date,Time,Value\n");
-            }
-            f_close(files_handle[i]);
-        } else {
-            printf("Erreur ouverture %s: %d\r\n", files[i], res);
+    // Créer le fichier température avec en-tête
+    res = f_open(&SDFile, "TEMP.CSV", FA_CREATE_ALWAYS | FA_WRITE);
+    if(res == FR_OK) {
+        res = f_write(&SDFile, header, strlen(header), (void *)&byteswritten);
+        if((byteswritten == 0) || (res != FR_OK)) {
+            printf("Erreur écriture en-tête température\n");
+            f_close(&SDFile);
             return res;
         }
+        f_close(&SDFile);
+    } else {
+        printf("Erreur création fichier température: %d\n", res);
+        return res;
     }
 
+    // Créer le fichier humidité avec en-tête
+    res = f_open(&SDFile, "HUM.CSV", FA_CREATE_ALWAYS | FA_WRITE);
+    if(res == FR_OK) {
+        res = f_write(&SDFile, header, strlen(header), (void *)&byteswritten);
+        if((byteswritten == 0) || (res != FR_OK)) {
+            printf("Erreur écriture en-tête humidité\n");
+            f_close(&SDFile);
+            return res;
+        }
+        f_close(&SDFile);
+    } else {
+        printf("Erreur création fichier humidité: %d\n", res);
+        return res;
+    }
+
+    printf("Système d'enregistrement initialisé avec succès\n");
     sd_logging_enabled = 1;
-    printf("Système d'enregistrement initialisé\r\n");
     return FR_OK;
 }
 
 // Fonction d'enregistrement appelée par l'interruption du timer
 void log_weather_data(void) {
-    if(!sd_logging_enabled) return;
-
-    WeatherData_t data;
+    FRESULT res;
+    uint32_t byteswritten;
     char buffer[100];
-    UINT bw;
+    FIL SDFile;
+
+    // Vérifier si le système est initialisé
+    if(!sd_logging_enabled) {
+        printf("Logging non activé\n");
+        return;
+    }
 
     // Récupérer l'heure et la date
-    HAL_RTC_GetTime(&hrtc, &data.time, RTC_FORMAT_BIN);
-    HAL_RTC_GetDate(&hrtc, &data.date, RTC_FORMAT_BIN);
+    RTC_TimeTypeDef time;
+    RTC_DateTypeDef date;
+    HAL_RTC_GetTime(&hrtc, &time, RTC_FORMAT_BIN);
+    HAL_RTC_GetDate(&hrtc, &date, RTC_FORMAT_BIN);
 
-    // Récupérer les mesures (utiliser vos fonctions existantes)
-    data.temperature = temperature_degC;  // Votre variable globale existante
-    data.humidity = humidity_perc;        // Votre variable globale existante
-    //data.pressure = pressure_hPa;         // Votre variable globale existante
+    // Essayer d'ouvrir/créer le fichier température
+    res = f_open(&SDFile, "TEMP.CSV", FA_OPEN_ALWAYS | FA_WRITE);
+    if(res == FR_OK) {
+        // Se positionner à la fin du fichier
+        f_lseek(&SDFile, f_size(&SDFile));
 
-    // Enregistrer température
-    f_open(&fil_temp, "temp.csv", FA_WRITE | FA_OPEN_EXISTING);
-    f_lseek(&fil_temp, f_size(&fil_temp));
-    sprintf(buffer, "20%02d-%02d-%02d,%02d:%02d:%02d,%.2f\n",
-            data.date.Year, data.date.Month, data.date.Date,
-            data.time.Hours, data.time.Minutes, data.time.Seconds,
-            data.temperature);
-    f_write(&fil_temp, buffer, strlen(buffer), &bw);
-    f_close(&fil_temp);
+        // Préparer la ligne de données
+        sprintf(buffer, "20%02d-%02d-%02d,%02d:%02d:%02d,%.2f\n",
+                date.Year, date.Month, date.Date,
+                time.Hours, time.Minutes, time.Seconds,
+                temperature_degC);
 
-    // Même chose pour humidité et pression...
-    // [Code similaire pour les autres fichiers]
+        // Écrire les données
+        res = f_write(&SDFile, buffer, strlen(buffer), (void *)&byteswritten);
+
+        if((byteswritten == 0) || (res != FR_OK)) {
+            printf("Erreur d'écriture température\n");
+        }
+
+        // Fermer le fichier
+        f_close(&SDFile);
+    } else {
+        printf("Erreur ouverture fichier température: %d\n", res);
+    }
+
+    // Même chose pour l'humidité
+    res = f_open(&SDFile, "HUM.CSV", FA_OPEN_ALWAYS | FA_WRITE);
+    if(res == FR_OK) {
+        f_lseek(&SDFile, f_size(&SDFile));
+
+        sprintf(buffer, "20%02d-%02d-%02d,%02d:%02d:%02d,%.2f\n",
+                date.Year, date.Month, date.Date,
+                time.Hours, time.Minutes, time.Seconds,
+                humidity_perc);
+
+        res = f_write(&SDFile, buffer, strlen(buffer), (void *)&byteswritten);
+
+        if((byteswritten == 0) || (res != FR_OK)) {
+            printf("Erreur d'écriture humidité\n");
+        }
+
+        f_close(&SDFile);
+    } else {
+        printf("Erreur ouverture fichier humidité: %d\n", res);
+    }
+
+    printf("Enregistrement effectué\n");
 }
 
 

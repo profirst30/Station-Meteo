@@ -1,2 +1,2 @@
-../Core/Src/SD_card.c:21:9:init_sd_logging	5
-../Core/Src/SD_card.c:54:6:log_weather_data	2
+../Core/Src/SD_card.c:21:9:init_sd_logging	8
+../Core/Src/SD_card.c:70:6:log_weather_data	8

@@ -63,7 +63,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/BSP/STM32746G-Discovery/../Components/ft5336/../Common/ts.h \
  ../Core/Inc/Interface.h ../Core/Inc/Nucleo_HumTemp_I2C.h \
  ../Drivers/User/hts221_reg.h ../Core/Inc/Nucleo_Pression_I2C.h \
- ../Drivers/User/lps22hh_reg.h
+ ../Drivers/User/lps22hh_reg.h ../Core/Inc/SD_card.h ../Core/Inc/rtc.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 ../Core/Inc/stm32f7xx_hal_conf.h:
@@ -143,3 +143,5 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/User/hts221_reg.h:
 ../Core/Inc/Nucleo_Pression_I2C.h:
 ../Drivers/User/lps22hh_reg.h:
+../Core/Inc/SD_card.h:
+../Core/Inc/rtc.h:
