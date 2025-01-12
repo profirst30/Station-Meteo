@@ -265,7 +265,7 @@ int main(void)
                       break;
 
                   case 7:
-                	  drawTempHumGraphPage();
+                	  //drawTempHumGraphPage();
                       needRedraw = 0; // Reset the redraw flag
                       break;
 
@@ -275,7 +275,7 @@ int main(void)
                       break;
 
                   case 9:
-                	  drawRainPressGraphPage();
+                	  //drawRainPressGraphPage();
                       needRedraw = 0; // Reset the redraw flag
                       break;
                 }
