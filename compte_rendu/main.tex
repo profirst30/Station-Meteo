@@ -78,6 +78,8 @@ Dans ce contexte, il est intéressant de pouvoir disposer d'un équipement perme
 
 L'objectif de ce projet, utilisant un système embarqué, est donc de concevoir et de réaliser une station météorologique.
 
+\newpage
+
 \section{Cahier des charges}
 \subsection{Objectifs détaillés}
 L'objectif de ce projet est de réaliser une station météorologique utilisant une carte STM32F746G DIscovery.
@@ -127,7 +129,6 @@ Ces mesures seront affichées et stockées directement sur la station (en utilis
     Écran LCD & Sortie & LTDC & 
     \begin{tabular}[c]{@{}l@{}}
     Multiple pins\\
-    (voir datasheet)
     \end{tabular} & 480x272 pixels \\
     \hline
     Carte SD & E/S & SDIO & 
@@ -194,13 +195,6 @@ La station météorologique doit répondre aux fonctionnalités suivantes :
     \item Optimisation de la consommation énergétique
     \item Adaptation de la fréquence d'échantillonnage selon les besoins
     \item Utilisation des modes basse consommation lorsque possible
-\end{itemize}
-
-\subsubsection{Communication}
-\begin{itemize}
-    \item Transmission des données vers un dispositif distant
-    \item Possibilité de configuration à distance
-    \item Remontée des alertes en cas de dépassement de seuils
 \end{itemize}
 
 
@@ -272,6 +266,66 @@ Pour récupérer l'information de pluviométrie avec le \textbf{STM32}, il faut 
 \end{itemize}
 
 Chaque basculement correspond à une quantité de pluie précise. Dans ce cas, chaque basculement de l'auget représente \textbf{0,2794 mm} de pluie.
+
+\subsection{Solution de communication radio}
+
+Pour la transmission des données vers un dispositif distant, plusieurs solutions de communication radio ont été étudiées. Les critères principaux de sélection étaient :
+\begin{itemize}
+    \item Compatibilité avec le STM32F746
+    \item Faible consommation énergétique
+    \item Portée adaptée à l'usage
+    \item Facilité d'intégration
+\end{itemize}
+
+Après analyse, voici les solutions potentielles identifiées :
+
+\subsubsection{Module LoRa}
+\begin{itemize}
+    \item \textbf{Avantages} :
+    \begin{itemize}
+        \item Très faible consommation
+        \item Longue portée (plusieurs kilomètres)
+        \item Idéal pour les applications IoT
+    \end{itemize}
+    \item \textbf{Inconvénients} :
+    \begin{itemize}
+        \item Débit limité
+        \item Nécessite une infrastructure réseau
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Module Bluetooth Low Energy (BLE)}
+\begin{itemize}
+    \item \textbf{Avantages} :
+    \begin{itemize}
+        \item Très faible consommation
+        \item Communication directe avec smartphones
+        \item Bibliothèques disponibles pour STM32
+    \end{itemize}
+    \item \textbf{Inconvénients} :
+    \begin{itemize}
+        \item Portée limitée (10-100m)
+        \item Connexion point à point
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Module NRF24L01+}
+\begin{itemize}
+    \item \textbf{Avantages} :
+    \begin{itemize}
+        \item Très faible consommation
+        \item Communication bidirectionnelle
+        \item Interface SPI simple
+        \item Coût réduit
+    \end{itemize}
+    \item \textbf{Inconvénients} :
+    \begin{itemize}
+        \item Portée moyenne (100m max)
+        \item Sensible aux interférences
+    \end{itemize}
+\end{itemize}
+
+Pour notre application, le module NRF24L01+ semble le plus adapté car il offre un bon compromis entre consommation énergétique, facilité d'intégration et performances. De plus, son interface SPI est directement compatible avec le STM32F746 et sa bibliothèque est bien documentée.
 
 \section{Analyse préliminaire}
 Afin que tout fonctionne au mieux, on a eu plusieurs séances de travail en groupe pour bien comprendre le fonctionnement de chaque capteur et de la carte STM32F746G Discovery.
@@ -475,7 +529,24 @@ La communication avec ces capteurs est réalisée via le bus I2C1. Voici les ét
     \item Test de la fréquence d'échantillonnage
 \end{itemize}
 
-[Insérer capture d'écran du terminal montrant les mesures]
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/test_unit_temp_hum.png}
+        \caption{Mesures de température et humidité}
+        \label{fig:test_temp_hum}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/test_unit_press.png}
+        \caption{Mesures de pression}
+        \label{fig:test_press}
+    \end{subfigure}
+    \caption{Tests des capteurs environnementaux}
+    \label{fig:test_enviro}
+\end{figure}
 
 \subsection{Anémomètre et Girouette}
 \subsubsection{Configuration matérielle}
