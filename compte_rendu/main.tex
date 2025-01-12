@@ -562,12 +562,24 @@ Tests effectués à l'aide d'un vrai giroscope et d'un anémomètre :
     \item Test des 16 positions de la girouette
 \end{itemize}
 
+
 \begin{figure}[H]
-    \capstart
     \centering
-    \includegraphics[width=0.8\textwidth]{./images/console_direction_du_vent_et_miseenveille.png}
-    \caption{Directions du vent et mise en veille (vue de la console)} 
-    \label{fig:girouette_positions}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/console_direction_du_vent_et_miseenveille.png}
+        \caption{Directions du vent et mise en veille (vue de la console)}
+        \label{fig:test_temp_hum}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./images/test_unit_vitesse_vent.png}
+        \caption{Mesure de vitesse du vent}
+        \label{fig:test_press}
+    \end{subfigure}
+    \caption{Tests des capteurs de vent}
+    \label{fig:test_vent}
 \end{figure}
 
 \subsection{Pluviomètre}
@@ -594,7 +606,7 @@ Le pluviomètre de type "tipping bucket" nécessite :
     \label{fig:pluviometrie}
 \end{figure}
 
-\subsection{Interface utilisateur LCD}
+\subsection{Interface utilisateur LCD} 
 \subsubsection{Configuration}
 \begin{itemize}
     \item Initialisation du contrôleur LTDC
@@ -633,9 +645,6 @@ Le pluviomètre de type "tipping bucket" nécessite :
     \item Test de performance en écriture continue
     \item Vérification de l'intégrité des données
 \end{itemize}
-
-[Insérer capture d'écran du contenu d'un fichier de log]
-
 
 \section{Intégration et validation finale}
 \subsection{Tests de validation finale}
