@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.2)  12 JAN 2025 17:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.2)  12 JAN 2025 19:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -706,12 +706,12 @@ Overfull \hbox (8.70486pt too wide) in paragraph at lines 230--231
 [3]
 
 [4]
-<./images/prototype_interface1.png, id=304, 5204.44376pt x 2311.63625pt>
+<./images/prototype_interface1.png, id=310, 5204.44376pt x 2311.63625pt>
 File: ./images/prototype_interface1.png Graphic file (type png)
 <use ./images/prototype_interface1.png>
 Package pdftex.def Info: ./images/prototype_interface1.png  used on input line 297.
 (pdftex.def)             Requested size: 364.19664pt x 161.76053pt.
-<./images/bords_du_modele1.png, id=305, 2678.808pt x 3642.408pt>
+<./images/bords_du_modele1.png, id=311, 2678.808pt x 3642.408pt>
 File: ./images/bords_du_modele1.png Graphic file (type png)
 <use ./images/bords_du_modele1.png>
 Package pdftex.def Info: ./images/bords_du_modele1.png  used on input line 326.
@@ -719,7 +719,7 @@ Package pdftex.def Info: ./images/bords_du_modele1.png  used on input line 326.
 
 
 [5 <./images/prototype_interface1.png>]
-<./images/flot_de_donnees1.png, id=314, 4097.709pt x 4376.55075pt>
+<./images/flot_de_donnees1.png, id=320, 4097.709pt x 4376.55075pt>
 File: ./images/flot_de_donnees1.png Graphic file (type png)
 <use ./images/flot_de_donnees1.png>
 Package pdftex.def Info: ./images/flot_de_donnees1.png  used on input line 346.
@@ -727,7 +727,7 @@ Package pdftex.def Info: ./images/flot_de_donnees1.png  used on input line 346.
 
 
 [6 <./images/bords_du_modele1.png>]
-<./images/flot_evenements.png, id=323, 4097.709pt x 3664.089pt>
+<./images/flot_evenements.png, id=329, 4097.709pt x 3664.089pt>
 File: ./images/flot_evenements.png Graphic file (type png)
 <use ./images/flot_evenements.png>
 Package pdftex.def Info: ./images/flot_evenements.png  used on input line 365.
@@ -735,153 +735,172 @@ Package pdftex.def Info: ./images/flot_evenements.png  used on input line 365.
 
 
 [7 <./images/flot_de_donnees1.png>]
+<./images/grafcetfinal.png, id=338, 6391.077pt x 2529.45pt>
+File: ./images/grafcetfinal.png Graphic file (type png)
+<use ./images/grafcetfinal.png>
+Package pdftex.def Info: ./images/grafcetfinal.png  used on input line 384.
+(pdftex.def)             Requested size: 364.19664pt x 144.1184pt.
 
-[8 <./images/flot_evenements.png>]
 
-[9]
-<./images/console_direction_du_vent_et_miseenveille.png, id=350, 341.47575pt x 191.5155pt>
+[8 <./images/flot_evenements.png> <./images/grafcetfinal.png>]
+<./images/grafcet_pluie_vent.png, id=349, 2527.041pt x 1835.658pt>
+File: ./images/grafcet_pluie_vent.png Graphic file (type png)
+<use ./images/grafcet_pluie_vent.png>
+Package pdftex.def Info: ./images/grafcet_pluie_vent.png  used on input line 401.
+(pdftex.def)             Requested size: 364.19664pt x 264.55302pt.
+<./images/machine_detats_interface.png, id=350, 1053.9375pt x 580.1675pt>
+File: ./images/machine_detats_interface.png Graphic file (type png)
+<use ./images/machine_detats_interface.png>
+Package pdftex.def Info: ./images/machine_detats_interface.png  used on input line 410.
+(pdftex.def)             Requested size: 364.19664pt x 200.48553pt.
+
+
+[9 <./images/grafcet_pluie_vent.png> <./images/machine_detats_interface.png>]
+
+[10]
+<./images/console_direction_du_vent_et_miseenveille.png, id=371, 341.47575pt x 191.5155pt>
 File: ./images/console_direction_du_vent_et_miseenveille.png Graphic file (type png)
 <use ./images/console_direction_du_vent_et_miseenveille.png>
-Package pdftex.def Info: ./images/console_direction_du_vent_et_miseenveille.png  used on input line 471.
+Package pdftex.def Info: ./images/console_direction_du_vent_et_miseenveille.png  used on input line 497.
 (pdftex.def)             Requested size: 364.19664pt x 204.26202pt.
 
 
-[10 <./images/console_direction_du_vent_et_miseenveille.png>]
-<./images/interface_mainpage.jpg, id=360, 906.38625pt x 710.655pt>
+[11 <./images/console_direction_du_vent_et_miseenveille.png>]
+<./images/interface_mainpage.jpg, id=380, 906.38625pt x 710.655pt>
 File: ./images/interface_mainpage.jpg Graphic file (type jpg)
 <use ./images/interface_mainpage.jpg>
-Package pdftex.def Info: ./images/interface_mainpage.jpg  used on input line 512.
+Package pdftex.def Info: ./images/interface_mainpage.jpg  used on input line 538.
 (pdftex.def)             Requested size: 364.19664pt x 285.54736pt.
 
 
-[11 <./images/interface_mainpage.jpg>]
-Overfull \hbox (5.9403pt too wide) in paragraph at lines 552--552
+[12 <./images/interface_mainpage.jpg>]
+Overfull \hbox (5.9403pt too wide) in paragraph at lines 578--578
 []\T1/cmr/m/n/12 Température/Humidité
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 570--570
+Underfull \hbox (badness 10000) in paragraph at lines 596--596
 []\T1/cmr/m/n/12 Configuration
  []
 
 
-Underfull \hbox (badness 3312) in paragraph at lines 576--576
+Underfull \hbox (badness 3312) in paragraph at lines 602--602
 []\T1/cmr/m/n/12 Sauvegarde des me-
  []
 
 
-Underfull \hbox (badness 4779) in paragraph at lines 580--580
+Underfull \hbox (badness 4779) in paragraph at lines 606--606
 []\T1/cmr/m/n/12 Agrégation des me-
  []
 
 
-Underfull \hbox (badness 4441) in paragraph at lines 628--628
+Underfull \hbox (badness 4441) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Tâche ef-fec-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Implantée
  []
 
 
-Underfull \hbox (badness 4316) in paragraph at lines 628--628
+Underfull \hbox (badness 4316) in paragraph at lines 654--654
 \T1/cmr/m/n/12 ver-sion cou-
  []
 
 
-Overfull \hbox (6.26659pt too wide) in paragraph at lines 628--628
+Overfull \hbox (6.26659pt too wide) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Implémentation(lecture
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 \T1/cmr/m/n/12 et agré-ga-tion) des
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Maxime MO-RET
  []
 
 
-Underfull \hbox (badness 2653) in paragraph at lines 628--628
+Underfull \hbox (badness 2653) in paragraph at lines 654--654
 \T1/cmr/m/n/12 et Koun-deme No-bel
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Implémentation des
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Koundeme No-bel
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Implémentation de
  []
 
 
-Underfull \hbox (badness 5316) in paragraph at lines 628--628
+Underfull \hbox (badness 5316) in paragraph at lines 654--654
 \T1/cmr/m/n/12 l'in-ter-face uti-li-sa-teur
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Koundeme No-bel
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Implémentation de
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Implémentation de
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Koundeme No-bel
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Koundeme No-bel
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Tristan GROUS-
  []
 
 
-Underfull \hbox (badness 5681) in paragraph at lines 628--628
+Underfull \hbox (badness 5681) in paragraph at lines 654--654
 []\T1/cmr/m/n/12 Schématisation Flow
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 \T1/cmr/m/n/12 de don-nées,Flow
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 628--628
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
 \T1/cmr/m/n/12 d'évé-ne-ments et
  []
 
 
 
-[12]
-
 [13]
 
 [14]
-runsystem(latexminted cleantemp  --timestamp 20250112175145 FAD58DE7366495DB4650CFEFAC2FCD61)...disabled (restricted).
+
+[15]
+runsystem(latexminted cleantemp  --timestamp 20250112192558 FAD58DE7366495DB4650CFEFAC2FCD61)...disabled (restricted).
 
  
 enddocument/afterlastpage: lastpage setting LastPage.
@@ -891,13 +910,13 @@ LaTeX2e <2024-11-01>
 L3 programming layer <2024-11-02>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 65D257E6C165E2F7D2C0CDFD4C63B150;7968.
+(rerunfilecheck)             Checksum: F278421E93F2F28FB08163AFA8B16084;7968.
  ) 
 Here is how much of TeX's memory you used:
- 20234 strings out of 473681
- 393674 string characters out of 5719671
- 951690 words of memory out of 5000000
- 42912 multiletter control sequences out of 15000+600000
+ 20265 strings out of 473681
+ 394654 string characters out of 5719671
+ 951847 words of memory out of 5000000
+ 42936 multiletter control sequences out of 15000+600000
  569429 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,14n,93p,592b,744s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -905,9 +924,9 @@ Here is how much of TeX's memory you used:
 pdfTeX warning (dest): name{toc} has been referenced but does not exist, replaced by a fixed one
 
  <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1200.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\User\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/User/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on main.pdf (17 pages, 3430747 bytes).
+Output written on main.pdf (18 pages, 4371177 bytes).
 PDF statistics:
- 756 PDF objects out of 1000 (max. 8388607)
- 86 named destinations out of 1000 (max. 500000)
- 405 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 780 PDF objects out of 1000 (max. 8388607)
+ 93 named destinations out of 1000 (max. 500000)
+ 420 words of extra memory for PDF output out of 10000 (max. 10000000)
 

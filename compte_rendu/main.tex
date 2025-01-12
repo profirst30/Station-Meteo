@@ -376,17 +376,43 @@ Les principaux événements sont :
 \end{itemize}
 
 \subsection{Machine d'états / GRAFCET}
-La machine d'états globale du système comprend les états suivants :
+La machine d'états globale du système se présente comme suit :
 
-[Insérer votre machine d'états ici]
+\begin{figure}[H]
+    \capstart
+    \centering
+    \includegraphics[width=0.8\textwidth]{./images/grafcetfinal.png}
+    \caption{GRAFCET Principal}
+    \label{fig:grafcet_principal}
+\end{figure}
 
 Les principaux états sont :
 \begin{itemize}
     \item Initialisation du système
     \item Acquisition des données
-    \item Traitement et mise à jour
-    \item Gestion des erreurs
+    \item Traitement et mise à jour des mesures
 \end{itemize}
+
+Les sous machines d'états sont représentées dans les diagrammes suivants :
+
+\begin{figure}[H]
+    \capstart
+    \centering
+    \includegraphics[width=0.8\textwidth]{./images/grafcet_pluie_vent.png}
+    \caption{GRAFCET Pluie et Vent}
+    \label{fig:grafcet_pluie_vent}
+\end{figure}
+Ce grafcet permet de gérer les interruptions des capteurs de pluie et de vent.
+
+\begin{figure}[H]
+    \capstart
+    \centering
+    \includegraphics[width=0.8\textwidth]{./images/machine_detats_interface.png}
+    \caption{Machine d'états Interface}
+    \label{fig:machine_etats_interface}
+\end{figure}
+
+Ce grafcet permet de gérer les différentes pages de l'interface utilisateur.
 
 \subsection{Table des interruptions et priorités}
 \begin{table}[H]

@@ -21,25 +21,25 @@
 \contentsline {subsection}{\numberline {3.3}Diagramme de flot de données}{7}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Diagramme de flot d'événements}{7}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}Machine d'états / GRAFCET}{8}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Table des interruptions et priorités}{9}{subsection.3.6}%
-\contentsline {section}{\numberline {4}Développement et validation unitaire}{9}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Stratégie de test}{9}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Capteurs environnementaux (HTS221 et LPS22HH)}{9}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Configuration}{9}{subsubsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Tests réalisés}{9}{subsubsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.3}Anémomètre et Girouette}{10}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Configuration matérielle}{10}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Validation}{10}{subsubsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.4}Pluviomètre}{10}{subsection.4.4}%
-\contentsline {subsubsection}{\numberline {4.4.1}Configuration matérielle}{10}{subsubsection.4.4.1}%
-\contentsline {subsubsection}{\numberline {4.4.2}Tests de validation}{10}{subsubsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.5}Interface utilisateur LCD}{10}{subsection.4.5}%
-\contentsline {subsubsection}{\numberline {4.5.1}Configuration}{10}{subsubsection.4.5.1}%
-\contentsline {subsubsection}{\numberline {4.5.2}Tests effectués}{11}{subsubsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.6}Stockage sur carte SD}{11}{subsection.4.6}%
-\contentsline {subsubsection}{\numberline {4.6.1}Configuration}{11}{subsubsection.4.6.1}%
-\contentsline {subsubsection}{\numberline {4.6.2}Validation}{11}{subsubsection.4.6.2}%
-\contentsline {section}{\numberline {5}Intégration et validation finale}{12}{section.5}%
-\contentsline {section}{\numberline {6}Tableau récapitulatif des fonctionnalités}{12}{section.6}%
-\contentsline {section}{\numberline {7}Tableau récapitulatif des taches}{12}{section.7}%
-\contentsline {section}{Conclusion}{14}{section*.24}%
+\contentsline {subsection}{\numberline {3.6}Table des interruptions et priorités}{10}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Développement et validation unitaire}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Stratégie de test}{10}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Capteurs environnementaux (HTS221 et LPS22HH)}{10}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Configuration}{10}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Tests réalisés}{10}{subsubsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.3}Anémomètre et Girouette}{11}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Configuration matérielle}{11}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Validation}{11}{subsubsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.4}Pluviomètre}{11}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Configuration matérielle}{11}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Tests de validation}{11}{subsubsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.5}Interface utilisateur LCD}{11}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Configuration}{11}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.2}Tests effectués}{12}{subsubsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.6}Stockage sur carte SD}{12}{subsection.4.6}%
+\contentsline {subsubsection}{\numberline {4.6.1}Configuration}{12}{subsubsection.4.6.1}%
+\contentsline {subsubsection}{\numberline {4.6.2}Validation}{12}{subsubsection.4.6.2}%
+\contentsline {section}{\numberline {5}Intégration et validation finale}{13}{section.5}%
+\contentsline {section}{\numberline {6}Tableau récapitulatif des fonctionnalités}{13}{section.6}%
+\contentsline {section}{\numberline {7}Tableau récapitulatif des taches}{13}{section.7}%
+\contentsline {section}{Conclusion}{15}{section*.30}%
