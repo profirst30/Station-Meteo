@@ -1,2 +1,2 @@
-../Core/Src/SD_card.c:21:9:init_sd_logging	608	static
-../Core/Src/SD_card.c:70:6:log_weather_data	760	static
+../Core/Src/SD_card.c:22:9:init_sd_logging	608	static
+../Core/Src/SD_card.c:71:6:log_weather_data	760	static

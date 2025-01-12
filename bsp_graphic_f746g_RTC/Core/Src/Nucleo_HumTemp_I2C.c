@@ -12,6 +12,9 @@
 #include "usart.h"
 #include "gpio.h"
 #include "stm32f7xx_hal.h"
+#include "fatfs.h"
+
+
 
 #include <string.h>
 #include <stdio.h>
@@ -113,27 +116,38 @@ void valeur_Hum(void) {
 
 
 // Fonction principale pour lire les données et les afficher
-void valeur_TempH(void) {
-    // Ajouter un debug print
-    printf("Reading temperature...\n");
+void valeur_TempH(void){
 
-    hts221_reg_t reg1;
-    hts221_status_get(&dev_ctx1, &reg1.status_reg);
+	hts221_reg_t reg1;
+	hts221_status_get(&dev_ctx1, &reg1.status_reg);
     if (reg1.status_reg.t_da) {
         memset(&data_raw_temperature, 0x00, sizeof(int16_t));
         hts221_temperature_raw_get(&dev_ctx1, &data_raw_temperature);
         temperature_degC = linear_interpolation(&lin_temp, data_raw_temperature);
         snprintf((char *)tx_buffer, sizeof(tx_buffer), "%6.2f deg", temperature_degC);
-
-        // Debug print
-        printf("Temperature: %6.2f deg\n", temperature_degC);
-
+        //printf((char const *)tx_buffer);
         BSP_LCD_SetFont(&Font16);
         BSP_LCD_DisplayStringAt(startX+2, startY + 70, (uint8_t*)tx_buffer, LEFT_MODE);
-    } else {
-        printf("Temperature data not available\n");
     }
 }
+
+float valeur_TempH_SD(void) {
+    hts221_reg_t reg1;
+    hts221_status_get(&dev_ctx1, &reg1.status_reg);
+    if (reg1.status_reg.t_da) {
+        memset(&data_raw_temperature, 0x00, sizeof(int16_t));
+        hts221_temperature_raw_get(&dev_ctx1, &data_raw_temperature);
+        float temp = linear_interpolation(&lin_temp, data_raw_temperature);
+
+        // Débogage : Afficher la température
+        printf("Raw Temperature: %d, Temperature: %.2f deg\n", data_raw_temperature, temp);
+
+        return temp;
+    }
+    printf("Temperature not available\n");
+    return 0.0f;  // Retourne 0 si la température n'est pas disponible
+}
+
 
 #define MAX_POINTS 10  // Nombre maximum de points à afficher dans le graphique
 
@@ -180,6 +194,49 @@ void value_humidity_graph(void) {
         }
 }
 
+void valeur_TempH_archive(void) {
+    hts221_reg_t reg1;
+    FIL tempFile;        // Handle du fichier pour la température
+    UINT byteswritten;   // Nombre de bytes écrits
+    char buffer[100];    // Buffer pour formater les données
+    RTC_TimeTypeDef sTime;
+    RTC_DateTypeDef sDate;
+
+    // Vérifie si la température est disponible
+    hts221_status_get(&dev_ctx1, &reg1.status_reg);
+    if (reg1.status_reg.t_da) {
+        // Lecture des données brutes et conversion
+        memset(&data_raw_temperature, 0x00, sizeof(int16_t));
+        hts221_temperature_raw_get(&dev_ctx1, &data_raw_temperature);
+        temperature_degC = linear_interpolation(&lin_temp, data_raw_temperature);
+
+        // Affiche sur l'écran LCD
+        snprintf((char *)tx_buffer, sizeof(tx_buffer), "%6.2f deg", temperature_degC);
+        BSP_LCD_SetFont(&Font16);
+        BSP_LCD_DisplayStringAt(startX + 2, startY + 70, (uint8_t *)tx_buffer, LEFT_MODE);
+
+        // Ouvre le fichier pour ajouter des données
+        if (f_open(&tempFile, "temperature.csv", FA_OPEN_APPEND | FA_WRITE) == FR_OK) {
+            // Récupère la date et l'heure actuelles
+            HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
+            HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+
+            // Formate les données pour les écrire
+            snprintf(buffer, sizeof(buffer), "%04d/%02d/%02d;%02d:%02d:%02d;%.2f\n",
+                     2000 + sDate.Year, sDate.Month, sDate.Date,
+                     sTime.Hours, sTime.Minutes, sTime.Seconds, temperature_degC);
+
+            // Écrit dans le fichier
+            f_write(&tempFile, buffer, strlen(buffer), &byteswritten);
+
+            // Ferme le fichier
+            f_close(&tempFile);
+            printf("Temperature data written to temperature.csv\n");
+        } else {
+            printf("Failed to open temperature.csv for writing\n");
+        }
+    }
+}
 
 
 static int32_t platform_write_hts221(void *handle, uint8_t reg, const uint8_t *bufp, uint16_t len) {

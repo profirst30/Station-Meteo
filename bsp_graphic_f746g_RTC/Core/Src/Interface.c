@@ -243,9 +243,9 @@ void drawWindDirPressurePage(void) {
     // Carré vitesse du vent
     BSP_LCD_DrawRect(startX, startY, squareSize, squareSize);
     BSP_LCD_DrawBitmap(startX + 20, startY + 20, (uint8_t *)wind_icon_bmp);
-    BSP_LCD_SetFont(&Font20);
-    sprintf(windStr, "30\nkm/h");
-    BSP_LCD_DisplayStringAt(startX + 20, startY + 60, (uint8_t*)windStr, LEFT_MODE);
+    //BSP_LCD_SetFont(&Font20);
+    //sprintf(windStr, "30\nkm/h");
+    //BSP_LCD_DisplayStringAt(startX + 20, startY + 60, (uint8_t*)windStr, LEFT_MODE);
 
     // Carré direction du vent
     BSP_LCD_DrawRect(startX + squareSize + spacing, startY, squareSize, squareSize);
@@ -256,7 +256,7 @@ void drawWindDirPressurePage(void) {
     // Carré pression
     BSP_LCD_DrawRect(startX + 2 * (squareSize + spacing), startY, squareSize, squareSize);
     BSP_LCD_DrawBitmap(startX + 2 * (squareSize + spacing) + 20, startY + 20, (uint8_t *)pressure_icon_bmp);
-    sprintf(pressureStr, "50\nbar");
+    //sprintf(pressureStr, "50\nbar");
     //BSP_LCD_DisplayStringAt(startX + 2 * (squareSize + spacing) + 20, startY + 60, (uint8_t*)pressureStr, LEFT_MODE);
 }
 
@@ -387,6 +387,10 @@ void drawTempHumGraphPage(void) {
     // Colonne 3 (gouttes)
     BSP_LCD_DrawBitmap(5*480/6 - 16, iconY, (uint8_t *)rain_icon_bmp);
 
+    // ===== Zone pour les graphiques =====
+    // TODO: Ajouter les graphiques dans chaque colonne
+
+
 }
 
 void drawRainPressGraphPage(void) {
@@ -424,6 +428,10 @@ void drawRainPressGraphPage(void) {
 
     // Colonne 3 (gouttes)
     BSP_LCD_DrawBitmap(5*480/6 - 16, iconY, (uint8_t *)rain_icon_bmp);
+
+    // ===== Zone pour les graphiques =====
+    // TODO: Ajouter les graphiques dans chaque colonne
+
 }
 
 
@@ -449,7 +457,7 @@ uint16_t rect_height = 3;
 #define MAX_POINTS 10
 float temps[MAX_POINTS];
 uint32_t times[MAX_POINTS];
-volatile int current_point = 0;
+int current_point = 0;
 
 
 

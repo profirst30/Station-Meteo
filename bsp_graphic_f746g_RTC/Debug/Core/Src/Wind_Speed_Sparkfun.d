@@ -41,7 +41,12 @@ Core/Src/Wind_Speed_Sparkfun.o: ../Core/Src/Wind_Speed_Sparkfun.c \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Core/Inc/tim.h ../Core/Inc/main.h ../Core/Inc/usart.h \
- ../Core/Inc/gpio.h ../Core/Inc/Wind_Speed_Sparkfun.h
+ ../Core/Inc/gpio.h ../Core/Inc/Wind_Speed_Sparkfun.h \
+ ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_lcd.h \
+ ../Drivers/BSP/STM32746G-Discovery/../Components/rk043fn48h/rk043fn48h.h \
+ ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h \
+ ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h \
+ ../Drivers/BSP/STM32746G-Discovery/../../../Utilities/Fonts/fonts.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 ../Core/Inc/stm32f7xx_hal_conf.h:
@@ -89,3 +94,8 @@ Core/Src/Wind_Speed_Sparkfun.o: ../Core/Src/Wind_Speed_Sparkfun.c \
 ../Core/Inc/usart.h:
 ../Core/Inc/gpio.h:
 ../Core/Inc/Wind_Speed_Sparkfun.h:
+../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_lcd.h:
+../Drivers/BSP/STM32746G-Discovery/../Components/rk043fn48h/rk043fn48h.h:
+../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h:
+../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery.h:
+../Drivers/BSP/STM32746G-Discovery/../../../Utilities/Fonts/fonts.h:

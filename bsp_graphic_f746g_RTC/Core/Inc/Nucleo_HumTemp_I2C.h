@@ -19,6 +19,8 @@ void valeur_Hum(void);
 void valeur_TempH(void);
 void valeur_graph_TempH(void);
 void value_humidity_graph(void);
+void valeur_TempH_archive(void);
+float valeur_TempH_SD(void);
 
 
 #endif /* INC_NUCLEO_PRESSION_I2C_H_ */

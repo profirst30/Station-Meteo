@@ -26,7 +26,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <Wind_Speed_Sparkfun.h>
-
+#include "stm32746g_discovery_lcd.h"
 
 // Coefficient pour convertir la fréquence en vitesse du vent (km/h)
 #define VITESSE_PAR_IMPULSION_PAR_SECONDE 2.4
@@ -45,6 +45,12 @@ uint32_t pclk1_freq = 0;
 volatile uint32_t pulse_count = 0; // Compteur des impulsions
 volatile uint8_t minute_flag = 0;  // Flag pour indiquer que 1 minute est écoulée
 
+const uint16_t squareSizeW = 120;
+const uint16_t spacingW = 30;
+const uint16_t startXW = 40;
+const uint16_t startYW = 80;  // Ajusté pour centrer verticalement
+
+extern uint8_t flag_meteo;
 
 //initialisation de timer (à appeler dans le main)
 void Wind_TIM_Init()
@@ -58,20 +64,36 @@ void Wind_Speed_Value()
 {
 
 	if (minute_flag) {
-			  captureDone = 0;
+
+		  //remise à 0 du timer 2 (mesure de station meteo non detecté pendant 1 min)
+			  flag_meteo=0;
+			  HAL_TIM_Base_Stop(&htim2);        // Arrêter le timer
+			  __HAL_TIM_SET_COUNTER(&htim2, 0); // Réinitialiser le compteur à zéro
+			  HAL_TIM_Base_Start(&htim2);       // Redémarrer le timer
+
 		      // Si 1 minute est écoulée, afficher les impulsions
+		      //remise à 0 du timer 2 (mesure de station meteo non detecté pendant 1 min)
 		      printf("Impulsions sur 1 minute : %lu\r\n", pulse_count);
-		      float vitesse_Vent = pulse_count*VITESSE_PAR_IMPULSION_PAR_SECONDE/60;
+		      float vitesse_Vent = pulse_count*VITESSE_PAR_IMPULSION_PAR_SECONDE/5;
 		      printf("vitesse du vent: %.2f Km/h \r\n ", vitesse_Vent);
 		      // Réinitialiser le computeur d'impulsions pour la prochaine minute
 		      pulse_count = 0;
 
+		      char vent[20];
+			  sprintf(vent, "%.2f Km/h", vitesse_Vent);
+			  BSP_LCD_SetFont(&Font16);
+			  BSP_LCD_DisplayStringAt(startXW + 5, startYW + 60, (uint8_t*)vent, LEFT_MODE);
+
 		      // Réinitialiser le flag pour le prochain intervalle de 1 minute
 		      minute_flag = 0;
 		      printf("Minute flag reset!\r\n"); // Vérifier que le flag est réinitialisé
+
+
+
 			  }
 		  //}
 }
+
 
 
 //routine de comptage par input capture (PIN PA8)

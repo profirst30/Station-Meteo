@@ -34,6 +34,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
+#include <string.h>
 #include "stm32746g_discovery.h"
 #include "stm32746g_discovery_sdram.h"
 #include "stm32746g_discovery_lcd.h"
@@ -42,7 +43,10 @@
 #include "Interface.h"
 #include "Nucleo_HumTemp_I2C.h"
 #include "Nucleo_Pression_I2C.h"
+#include "Rain_Measure_Sparkfun.h"
 #include "SD_card.h"
+#include "Wind_Dir_Sparkfun.h"
+#include "Wind_Speed_Sparkfun.h"
 /*#include "Rain_Measure_Sparkfun.h"
 #include "Wind_Dir_Sparkfun.h"
 #include "Wind_Speed_Sparkfun.h"
@@ -69,19 +73,25 @@
 /* USER CODE BEGIN PV */
 
 //Taille de l'écran
-//uint16_t LCD_X_SIZE = 460;
-//uint16_t LCD_Y_SIZE = 280;
 
 volatile TS_StateTypeDef  TS_State;
 volatile uint16_t x, y;
 int needRedraw=1;
 int debounce = 0; // Debounce flag
 
+// Variable pour suivre l'état du système
 extern uint8_t minute_flag;  // Flag pour indiquer que 1 minute est écoulée
-uint8_t I2c_Flag=0;
-//Pour la carte externe
-volatile uint16_t timer_15min_counter = 0;
-const uint16_t TIMER_15MIN_MAX = 60; // 15 minutes = 900 secondes
+uint8_t flag=0;
+volatile uint8_t flag_meteo=0;
+extern int graph_open_flag;
+
+uint8_t flag_ext_button=0;
+uint8_t time_IRQ_acquisition;
+uint8_t flag_IRQ_sleep=0;
+
+extern uint32_t rainCount;
+extern uint8_t flagRain;
+
 
 /* USER CODE END PV */
 
@@ -173,6 +183,9 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM6_Init();
   MX_TIM7_Init();
+  MX_TIM5_Init();
+  MX_TIM8_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   BSP_LCD_Init();
   BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER, SDRAM_DEVICE_ADDR);
@@ -185,20 +198,25 @@ int main(void)
 
   init_HumTemp();
   init_Pression();
-  init_sd_logging();
-  HAL_TIM_Base_Start_IT(&htim7);
   //BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
   TouchTimer_Init();
+  HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_1);
+  HAL_TIM_Base_Start_IT(&htim7);
 
-  //drawGraphPage();
-  //drawMenuPage();
-  //drawCreditsPage();
-  //drawTempHumidRainPage();
-  //drawWindDirPressurePage();
-  //drawSettingsPage();
+  __HAL_TIM_SET_COUNTER(&htim5, 0);           // Réinitialise le compteur à 0
+  __HAL_TIM_CLEAR_FLAG(&htim5, TIM_FLAG_UPDATE); // Efface le drapeau d'interruption
+  HAL_TIM_Base_Start_IT(&htim5);
 
-  int flag=0;
-  extern int graph_open_flag;
+  __HAL_TIM_SET_COUNTER(&htim8, 0);           // Réinitialise le compteur à 0
+  __HAL_TIM_CLEAR_FLAG(&htim8, TIM_FLAG_UPDATE); // Efface le drapeau d'interruption
+  HAL_TIM_Base_Start_IT(&htim8);
+
+  __HAL_TIM_SET_COUNTER(&htim2, 0);           // Réinitialise le compteur à 0
+  __HAL_TIM_CLEAR_FLAG(&htim2, TIM_FLAG_UPDATE); // Efface le drapeau d'interruption
+  HAL_TIM_Base_Start_IT(&htim2);
+
+  init_sd_logging();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -263,30 +281,58 @@ int main(void)
                 }
          }
 
-         /*if(I2c_Flag)
+         //affichage des valeurs toutes les 5 secondes
+         else if(time_IRQ_acquisition)
          {
-			 }
-			 I2c_Flag=0;
-         }*/
-  	  	  	 if(flag==1){
-  				 valeur_TempH();
-  				 valeur_Hum();
-  				 Rain_Measure_Value();
-  			 }
+			 if(flag==1){
+					 valeur_TempH();
+					 valeur_Hum();
+					 if(flag_meteo==0){
+						 Draw_Rain_Measure_Value();
+					 }
+				 }
 
   	  	  	 else if(flag==2){
-  				 valeur_Pression();
-  				 Wind_Dir_Value();
-  				 Wind_Speed_Value();
+  	  	  		 valeur_Pression();
+  	  	  		 if(flag_meteo==0){
+					 Wind_Dir_Value();
+					 Wind_Speed_Value();
+  	  	  		 }
   			 }
 
-         /*if(flag==8){
+			 time_IRQ_acquisition=0;
+         }
 
-         }*/
+		 //condition de mise en sommeil et de réveil
+		 else if (flag_IRQ_sleep == 1) {
+			BSP_LCD_DisplayOff();
+			printf("Entrée en sommeil\r\n");
 
+			// Entrer en mode STOP
+			HAL_PWR_EnterSTOPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+			//HAL_SuspendTick() et HAL_ResumeTick() non utilisé pour la RTC;
+
+
+			//reactivation et redessinage de l'interface
+			SystemClock_Config(); // Reconfigure les horloges
+			BSP_LCD_Init();
+			BSP_LCD_DisplayOn();  // Rallume l'écran
+			BSP_LCD_SetFont(&Font16); // Police de caractères pour l'affichage
+
+			needRedraw = 1;
+
+			//redémarrage du compteur
+			HAL_TIM_Base_Stop_IT(&htim5);  // Arrêter le timer en mode veille
+			__HAL_TIM_SET_COUNTER(&htim5, 0);  // Réinitialiser le compteur du timer
+			__HAL_TIM_CLEAR_FLAG(&htim5, TIM_FLAG_UPDATE); // Efface le drapeau d'interruption
+			HAL_TIM_Base_Start_IT(&htim5);  // Redémarrer le timer
+			printf("Réveil de l'écran\r\n");
+
+  	  	 }
 
          //changement d'état par interruption sur bouton du touch screen
          if (TS_State.touchDetected && !debounce) {
+
         	 debounce=1;
 			   //hum Temp Rain button
 			  if (flag == 0 && x > 40 && x < 220 && y > 60 && y < 220) {
@@ -462,7 +508,13 @@ int main(void)
 				              HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
 				          }
 				      }
+				  //remise à 0 du timer 5 si l'écran est touché (Mise en sommeil).
+
 				  }
+			  	  HAL_TIM_Base_Stop(&htim5);
+			  	  __HAL_TIM_SET_COUNTER(&htim5, 0);
+			  	  HAL_TIM_Base_Start(&htim5);
+
 
 		  } else if (!TS_State.touchDetected) {
 			  debounce = 0; // Reset debounce flag when touch is released
@@ -563,6 +615,7 @@ void PollTouchScreen(void)
 	}
 }
 
+//interruption timer
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
@@ -578,24 +631,49 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
   }
   //routine d'interruption pour un arret à 1 minute (Annemometre)
-  if (htim->Instance == TIM6) {
-	  // Timer 1 minute atteint
-	minute_flag = 1; // Activer le flag indiquant la fin de 1 minute
+  else if (htim->Instance == TIM6) {
+	  // Timer pour mesurer la valeur moyenne du vent
+	  minute_flag = 1; // Activer le flag indiquant la fin de 1 minute (5s pour le test)
 	  printf("Minute flag set!\r\n"); // Pour vérifier que l'interruption est déclenchée
   }
 
-  //capteur I2C
-  if(htim->Instance == TIM7) {
-      timer_15min_counter++;
-      printf("Counter: %d\n", timer_15min_counter);  // Debug
+  //capteur
+  else if(htim->Instance == TIM8) {
+  	  // Timer valeur toute les 5s
+	  time_IRQ_acquisition=1; // Activer le flag indiquant la fin de 1 minute
+    }
 
-      if(timer_15min_counter >= TIMER_15MIN_MAX) {
+  else if(htim->Instance == TIM7) {
+	  	//écriture des valeurs sur la carte SD;
           printf("Tentative d'enregistrement...\n");  // Debug
           log_weather_data();
-          timer_15min_counter = 0;
-      }
+    }
+
+  else if(htim->Instance == TIM5) {
+	  // Timer 30 seconde atteint(mise en veille)
+	  flag_IRQ_sleep=1; // Activer le flag indiquant la fin de 1 minute
+  }
+
+  else if(htim->Instance == TIM2) {
+  	  // Timer si 1 minute atteint
+  	  flag_meteo=1; // Activer le flag indiquant la fin de 1 minute
   }
   /* USER CODE END Callback 1 */
+}
+
+//interruption GPIO
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+    UNUSED(GPIO_Pin);
+
+    if(GPIO_Pin == GPIO_PIN_15){
+    	  rainCount++;
+    	  flagRain=1;
+    }
+
+    else if (GPIO_Pin == sleep_button_Pin) {
+          flag_ext_button = 1;
+    	  flag_IRQ_sleep=0;
+    }
 }
 
 PUTCHAR_PROTOTYPE

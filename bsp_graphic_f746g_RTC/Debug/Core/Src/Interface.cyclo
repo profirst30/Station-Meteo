@@ -8,10 +8,10 @@
 ../Core/Src/Interface.c:220:6:drawWindDirPressurePage	1
 ../Core/Src/Interface.c:270:6:drawSettingsPage	1
 ../Core/Src/Interface.c:353:6:drawTempHumGraphPage	1
-../Core/Src/Interface.c:392:6:drawRainPressGraphPage	1
-../Core/Src/Interface.c:457:6:draw_temperature_graph	4
-../Core/Src/Interface.c:525:6:update_temperature_graph	3
-../Core/Src/Interface.c:552:6:draw_humidity_graph	4
-../Core/Src/Interface.c:620:6:update_humidity_graph	3
-../Core/Src/Interface.c:646:6:draw_pressure_graph	10
-../Core/Src/Interface.c:728:6:update_pressure_graph	3
+../Core/Src/Interface.c:396:6:drawRainPressGraphPage	1
+../Core/Src/Interface.c:465:6:draw_temperature_graph	4
+../Core/Src/Interface.c:533:6:update_temperature_graph	3
+../Core/Src/Interface.c:560:6:draw_humidity_graph	4
+../Core/Src/Interface.c:628:6:update_humidity_graph	3
+../Core/Src/Interface.c:654:6:draw_pressure_graph	10
+../Core/Src/Interface.c:736:6:update_pressure_graph	3

@@ -53,8 +53,8 @@ const char* directionStrings[NUM_POSITIONS] = {
 const char* directionStrings[NUM_POSITIONS] = {
     "N", "NNE", "NE", "ENE",
     "E", "ESE", "SE", "SSE",
-    "S", "SSW", "SW", "WSW",
-    "W", "WNW", "NW", "NNW"
+    "S", "SSO", "SO", "OSO",
+    "O", "ONO", "NO", "NNO"
 };
 
 float externalResistor = 20000.0;  // 20k ohms external resistor
@@ -77,7 +77,8 @@ void Wind_Dir_Value() {
         R_sensor = (externalResistor * (Vref / voltage)) - externalResistor;
         printf("Resistance: %.2f ohms\r\n", R_sensor);
 
-        const char* direction = "Unknown";
+
+        const char* direction = "Unk"; //si aucune valeur n'est trouvé "unknow"
         float minDifference = 5000.0;  // Initialisation ajustée
 
         for (int i = 0; i < NUM_POSITIONS; i++) {
@@ -88,6 +89,7 @@ void Wind_Dir_Value() {
                 direction = directionStrings[i];
             }
         }
+		BSP_LCD_SetFont(&Font16); // Police de caractères pour l'affichage
         BSP_LCD_DisplayStringAt(startXD + squareSizeD + spacingD + 20, startYD + 70, (uint8_t*)direction, LEFT_MODE);
         printf("Detected Wind Direction: %s\r\n", direction);
     } else {

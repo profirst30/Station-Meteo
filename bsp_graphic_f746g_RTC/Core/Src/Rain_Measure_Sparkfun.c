@@ -37,7 +37,7 @@
 
 volatile uint32_t rainCount = 0;
 volatile uint8_t timeElapsed = 0;
-uint8_t flagRain=0;
+volatile uint8_t flagRain=0;
 float rainfallR=0.0;
 
 //valeur de référence pour dessiner sur l'interface
@@ -45,6 +45,8 @@ volatile const uint16_t squareSizeR = 120;
 volatile const uint16_t spacingR = 30;
 volatile const uint16_t startXR = 40;
 volatile const uint16_t startYR = 80;  // Ajusté pour centrer verticalement
+
+extern uint8_t flag_meteo;
 
 
 RTC_TimeTypeDef currentTime, lastTime; // Variables pour garder une trace de la minute actuelle
@@ -88,10 +90,17 @@ void check_minute_change(void) {
 }
 
 
-//revoie les mesures de pluie
-void Rain_Measure_Value(){
+//revoie et affiche les mesures de pluie
+void Draw_Rain_Measure_Value(){
 
 	if(flagRain){
+
+		  //remise à 0 du timer 2 (mesure de station meteo non detecté pendant 1 min)
+		  flag_meteo=0;
+		  HAL_TIM_Base_Stop(&htim2);        // Arrêter le timer
+		  __HAL_TIM_SET_COUNTER(&htim2, 0); // Réinitialiser le compteur à zéro
+		  HAL_TIM_Base_Start(&htim2);       // Redémarrer le timer
+
 		  printf("raincount: %lu \r\n", rainCount);
 		  rainfallR = rainCount * VOLUME_PAR_IMPULSION;
 
@@ -110,18 +119,27 @@ void Rain_Measure_Value(){
 }
 
 
+//revoie les mesures de pluie
+void Rain_Measure_Value(){
+
+	if(flagRain){
+		  printf("raincount: %lu \r\n", rainCount);
+		  rainfallR = rainCount * VOLUME_PAR_IMPULSION;
+
+		  printf("Volume d'eau par seconde: %.2f mm\r\n", rainfallR);
+		  timeElapsed = 0;
+		  flagRain=0;
+		  char rainfallStr[20];
+		  sprintf(rainfallStr, "%.2f mm", rainfallR);
+
+	}
+}
+
+
 //routine d'interruption pour un arret à durée paramétrable
 
 //routine d'interruption pour comptage (PIN PA15)
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  /* Prevent unused argument(s) compilation warning */
-  UNUSED(GPIO_Pin);
-  if(GPIO_Pin == GPIO_PIN_15){
-	  rainCount++;
-	  flagRain=1;
-  }
-}
+
 
 
 

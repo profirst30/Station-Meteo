@@ -42,7 +42,14 @@ Core/Src/Nucleo_HumTemp_I2C.o: ../Core/Src/Nucleo_HumTemp_I2C.c \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Core/Inc/i2c.h ../Core/Inc/main.h ../Core/Inc/usart.h \
- ../Core/Inc/gpio.h ../Core/Inc/Nucleo_HumTemp_I2C.h \
+ ../Core/Inc/gpio.h ../FATFS/App/fatfs.h \
+ ../Middlewares/Third_Party/FatFs/src/ff.h \
+ ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
+ ../FATFS/Target/bsp_driver_sd.h ../FATFS/Target/fatfs_platform.h \
+ ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
+ ../Middlewares/Third_Party/FatFs/src/diskio.h \
+ ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
+ ../Core/Inc/Nucleo_HumTemp_I2C.h \
  ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_lcd.h \
  ../Drivers/BSP/STM32746G-Discovery/../Components/rk043fn48h/rk043fn48h.h \
  ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_sdram.h \
@@ -96,6 +103,16 @@ Core/Src/Nucleo_HumTemp_I2C.o: ../Core/Src/Nucleo_HumTemp_I2C.c \
 ../Core/Inc/main.h:
 ../Core/Inc/usart.h:
 ../Core/Inc/gpio.h:
+../FATFS/App/fatfs.h:
+../Middlewares/Third_Party/FatFs/src/ff.h:
+../Middlewares/Third_Party/FatFs/src/integer.h:
+../FATFS/Target/ffconf.h:
+../FATFS/Target/bsp_driver_sd.h:
+../FATFS/Target/fatfs_platform.h:
+../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
+../Middlewares/Third_Party/FatFs/src/diskio.h:
+../Middlewares/Third_Party/FatFs/src/ff.h:
+../FATFS/Target/sd_diskio.h:
 ../Core/Inc/Nucleo_HumTemp_I2C.h:
 ../Drivers/BSP/STM32746G-Discovery/stm32746g_discovery_lcd.h:
 ../Drivers/BSP/STM32746G-Discovery/../Components/rk043fn48h/rk043fn48h.h:

@@ -10,6 +10,7 @@
 
 void Rain_TIM_Init();
 void Rain_Measure_Value();
+void Draw_Rain_Measure_Value();
 
 
 #endif /* INC_RAIN_MEASURE_SPARKFUN_H_ */

@@ -17,6 +17,7 @@ uint8_t sd_logging_enabled = 0;
 extern float humidity_perc;
 extern float temperature_degC;
 
+
 // Initialisation du système d'enregistrement
 FRESULT init_sd_logging(void) {
     FRESULT res;
