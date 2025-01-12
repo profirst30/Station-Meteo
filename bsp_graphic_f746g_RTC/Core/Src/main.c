@@ -370,22 +370,22 @@ int main(void)
          		 needRedraw = 1; // Set the redraw flag
 
          	  //Rain graph
-         	  } else if (flag == 1 && x > 320 && x < 440 && y > 80 && y < 200){
+         	  } /*else if (flag == 1 && x > 320 && x < 440 && y > 80 && y < 200){
           		 flag = 7;
           		 needRedraw = 1; // Set the redraw flag
 
           	  //Pressure graph
-         	  } else if (flag == 2 && x > 320 && x < 440 && y > 80 && y < 200){
+         	  }*/ else if (flag == 2 && x > 320 && x < 440 && y > 80 && y < 200){
 				 flag = 8;
 				 needRedraw = 1; // Set the redraw flag
 
 			  //Wind Graph
-			  }else if (flag == 2 && x > 40 && x < 160 && y > 80 && y < 200){
+			  }/*else if (flag == 2 && x > 40 && x < 160 && y > 80 && y < 200){
 				 flag = 9;
 				 needRedraw = 1; // Set the redraw flag
 
 			  //return data page 1 button
-			  } else if ((flag == 5 || flag == 6 || flag == 7) && x > 10 && x < 40 && y > 10 && y < 40) {
+			  }*/ else if ((flag == 5 || flag == 6 || flag == 7) && x > 10 && x < 40 && y > 10 && y < 40) {
 				  flag = 1;
 				  needRedraw = 1; // Set the redraw flag
 
@@ -393,7 +393,7 @@ int main(void)
 			  } else if ((flag == 8 || flag == 9) && x > 10 && x < 40 && y > 10 && y < 40) {
 				  flag = 2;
 				  needRedraw = 1; // Set the redraw flag
-				  //Dans la partie où vous gérez les touches
+
 			  } else if (flag == 3) {
 				      const uint16_t col1 = 150;
 				      const uint16_t col2 = col1 + 90;

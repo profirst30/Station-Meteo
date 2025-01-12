@@ -294,7 +294,7 @@ Après avoir répondu à ces questions, nous avons défini le prototype de notre
 \begin{figure}[H]
     \capstart
     \centering
-    \includegraphics[width=0.8\textwidth]{./images/prototype_interface.png}
+    \includegraphics[width=0.8\textwidth]{./images/prototype_interface1.png}
     \caption{Interface utilisateur}
     \label{fig:interface}
 \end{figure}
@@ -305,7 +305,7 @@ Notre interface utilisateur est divisée en cinq parties principales :
     \item Deux pages qui affichent les valeurs en temps réel des capteurs
     \item L'écran configuration qui permet de configurer la date et l'heure
     \item La page des informations qui affiche les informations sur le projet
-    \item Les pages des graphiques
+    \item Les pages des graphiques(température,humidité,pression)
 \end{itemize}
 
 Une fois cette interface définie, nous avons pu commencer à travailler sur les différents diagrammes de flot de données, de flot d'événements et de GRAFCET.
@@ -386,22 +386,35 @@ Les principaux états sont :
 \begin{table}[H]
 \centering
 \caption{Priorités des interruptions}
-\begin{tabular}{|l|l|l|l|}
+\begin{tabular}{|l|c|l|l|}
 \hline
-\textbf{Source} & \textbf{Priorité} & \textbf{Description} & \textbf{Utilisation} \\
+\textbf{Source} & \textbf{Priorité} & \textbf{Description} & \textbf{Fonction} \\
 \hline
-EXTI Anémomètre & Haute & Mesure vitesse vent & Comptage impulsions \\
+Timer 5 & 1 & Cycle de sommeil & Gestion mode basse consommation \\
 \hline
-EXTI Pluviomètre & Haute & Mesure pluie & Comptage basculements \\
+Timer 2 & 2 & Timer périodique & Échantillonnage capteurs I2C \\
 \hline
-Timer Échantillonnage & Moyenne & Lecture capteurs I2C & Acquisition périodique \\
+Timer 3 & 3 & Timer périodique & Rafraîchissement écran \\
 \hline
-Timer LCD & Basse & Rafraîchissement écran & Mise à jour affichage \\
+Timer 8 & 4 & Timer périodique & Gestion du stockage SD \\
 \hline
-SDIO & Moyenne & Accès carte SD & Stockage données \\
+Timer 7 & 5 & Timer périodique & Mise à jour graphiques \\
+\hline
+Timer 1 \& 6 & 6 & Timer périodique & Lecture des capteurs \\
+\hline
+EXTI Bouton & 1 & Interruption externe & Interaction utilisateur et réveil \\
+\hline
+EXTI PA15 & 6 & Interruption externe & Mesure pluviométrie \\
 \hline
 \end{tabular}
 \end{table}
+
+Les priorités ont été définies en fonction de l'importance des tâches :
+\begin{itemize}
+    \item Priorité 1 : Gestion du sommeil et réveil système
+    \item Priorités 2-5 : Tâches périodiques de mesure et affichage
+    \item Priorité 6 : Acquisition des données des capteurs
+\end{itemize}
 
 
 \section{Développement et validation unitaire}
@@ -441,14 +454,18 @@ L'anémomètre nécessite :
 \end{itemize}
 
 \subsubsection{Validation}
-Tests effectués à l'aide d'un oscilloscope et du logiciel Analog Discovery :
+Tests effectués à l'aide d'un vrai giroscope et d'un anémomètre :
 \begin{itemize}
-    \item Mesure de la fréquence des impulsions
-    \item Validation de la conversion fréquence/vitesse
     \item Test des 16 positions de la girouette
 \end{itemize}
 
-[Insérer capture d'écran de l'oscilloscope]
+\begin{figure}[H]
+    \capstart
+    \centering
+    \includegraphics[width=0.8\textwidth]{./images/console_direction_du_vent_et_miseenveille.png}
+    \caption{Directions du vent et mise en veille (vue de la console)} 
+    \label{fig:girouette_positions}
+\end{figure}
 
 \subsection{Pluviomètre}
 \subsubsection{Configuration matérielle}
@@ -483,7 +500,13 @@ Le pluviomètre de type "tipping bucket" nécessite :
     \item Vérification du contraste et de la lisibilité
 \end{itemize}
 
-[Insérer capture d'écran de l'interface]
+\begin{figure}[H]
+    \capstart
+    \centering
+    \includegraphics[width=0.8\textwidth]{./images/interface_mainpage.jpg}
+    \caption{Interface utilisateur - Page principale}
+    \label{fig:interface_mainpage}
+\end{figure}
 
 \subsection{Stockage sur carte SD}
 \subsubsection{Configuration}
@@ -569,7 +592,7 @@ Le tableau ci-dessus présente :
 \end{itemize}
 
 
-\section{Tableau récapitulatif des fonctionnalités}
+\section{Tableau récapitulatif des taches}
 Ce tableau résume les tâches affectées à chaque membre de l'équipe et leur état d'avancement.
 
 \begin{table}[htbp]

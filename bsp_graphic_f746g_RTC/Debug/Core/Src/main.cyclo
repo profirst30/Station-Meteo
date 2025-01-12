@@ -1,5 +1,5 @@
 ../Core/Src/main.c:116:6:getRTCDateStr	1
-../Core/Src/main.c:146:5:main	144
+../Core/Src/main.c:146:5:main	134
 ../Core/Src/main.c:531:6:SystemClock_Config	4
 ../Core/Src/main.c:585:6:TouchTimer_Init	3
 ../Core/Src/main.c:596:6:PollTouchScreen	4
