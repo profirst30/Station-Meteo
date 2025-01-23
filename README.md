@@ -123,8 +123,6 @@ L'écran d'accueil présente :
 
 ### Navigation
 - **Appui simple** : Accès aux pages détaillées
-- **Glissement** : Navigation entre les graphiques
-- **Double appui** : Retour au menu principal
 
 ### Configuration
 1. Accéder au menu Configuration
