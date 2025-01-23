@@ -135,11 +135,6 @@ L'écran d'accueil présente :
 
 ## Développement
 
-### Style de Code
-- Respecter les conventions de nommage
-- Commenter les fonctions et algorithmes complexes
-- Suivre les guidelines STM32
-
 ## Support et Contact
 - Pour les bugs : Ouvrir une Issue sur GitHub
 - Questions techniques : Consulter la documentation
