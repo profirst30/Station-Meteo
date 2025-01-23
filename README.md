@@ -109,7 +109,7 @@ station-meteo-stm32/
 │       └── FatFs/                  # Système de fichiers FAT
 ├── Documentation/
 │   ├── Images/                     # Screenshots et schémas
-│   └── Technical_Guide.pdf         # Guide technique détaillé
+│   └── Rapport
 └── README.md                       # Ce fichier
 ```
 
@@ -132,15 +132,3 @@ L'écran d'accueil présente :
 3. Configurer les paramètres d'acquisition
 4. Valider les modifications
 
-
-## Développement
-
-## Support et Contact
-- Pour les bugs : Ouvrir une Issue sur GitHub
-- Questions techniques : Consulter la documentation
-- Contact : Liste des développeurs ci-dessous
-
-## Équipe de Développement
-- **Maxime MORET** : Capteurs I2C, Interface utilisateur
-- **Koundeme Nobel DJESSOU** : Interface tactile, RTC, Stockage SD
-- **Tristan GROUSSARD** : Architecture système, Documentation
